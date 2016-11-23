@@ -1,0 +1,117 @@
+{
+  "__type__": "cc.AnimationClip",
+  "_name": "Email",
+  "_objFlags": 0,
+  "_rawFiles": null,
+  "_duration": 0.67,
+  "sample": 60,
+  "speed": 1,
+  "wrapMode": 1,
+  "curveData": {
+    "paths": {
+      "bg/panel_click/bg_left": {
+        "props": {
+          "color": [
+            {
+              "frame": 0,
+              "value": {
+                "__type__": "cc.Color",
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 255
+              },
+              "curve": "cubicOut"
+            },
+            {
+              "frame": 0.5,
+              "value": {
+                "__type__": "cc.Color",
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              }
+            }
+          ]
+        }
+      },
+      "bg/panel_click/bg_rigth": {
+        "props": {
+          "color": [
+            {
+              "frame": 0,
+              "value": {
+                "__type__": "cc.Color",
+                "r": 1,
+                "g": 1,
+                "b": 1,
+                "a": 255
+              },
+              "curve": "cubicOut"
+            },
+            {
+              "frame": 0.5,
+              "value": {
+                "__type__": "cc.Color",
+                "r": 255,
+                "g": 255,
+                "b": 255,
+                "a": 255
+              }
+            }
+          ]
+        }
+      },
+      "Panel_Email": {
+        "props": {
+          "scaleX": [
+            {
+              "frame": 0,
+              "value": 0.97
+            },
+            {
+              "frame": 0.16666666666666666,
+              "value": 1.02
+            },
+            {
+              "frame": 0.3333333333333333,
+              "value": 0.99
+            },
+            {
+              "frame": 0.5,
+              "value": 1.01
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 1
+            }
+          ],
+          "scaleY": [
+            {
+              "frame": 0,
+              "value": 0.97
+            },
+            {
+              "frame": 0.16666666666666666,
+              "value": 1.02
+            },
+            {
+              "frame": 0.3333333333333333,
+              "value": 0.99
+            },
+            {
+              "frame": 0.5,
+              "value": 1.01
+            },
+            {
+              "frame": 0.6666666666666666,
+              "value": 1
+            }
+          ]
+        }
+      }
+    }
+  },
+  "events": []
+}

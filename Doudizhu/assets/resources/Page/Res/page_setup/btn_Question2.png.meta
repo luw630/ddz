@@ -1,0 +1,30 @@
+{
+  "ver": "1.0.0",
+  "uuid": "8cc54777-8c42-42b7-83ec-e3288395c661",
+  "type": "sprite",
+  "wrapMode": "clamp",
+  "filterMode": "bilinear",
+  "subMetas": {
+    "btn_Question2": {
+      "ver": "1.0.3",
+      "uuid": "2347cc25-7603-4f81-8a1c-319ac2d19dfd",
+      "rawTextureUuid": "8cc54777-8c42-42b7-83ec-e3288395c661",
+      "trimType": "auto",
+      "trimThreshold": 1,
+      "rotated": false,
+      "offsetX": 0,
+      "offsetY": 0,
+      "trimX": 0,
+      "trimY": 0,
+      "width": 175,
+      "height": 71,
+      "rawWidth": 175,
+      "rawHeight": 71,
+      "borderTop": 0,
+      "borderBottom": 0,
+      "borderLeft": 0,
+      "borderRight": 0,
+      "subMetas": {}
+    }
+  }
+}
