@@ -17,7 +17,12 @@ cc.Class({
         this._super()
 
         var self_rid = global.GPlayerDataModel.getRid()
-        global.GNetGameServer.send_PlayerGameRecordinfo(self_rid)
+        var data = {
+            rid: self_rid,
+            id: 0,
+            limit: 50
+        }
+        global.GNetGameServer.send_PlayerGameRecordinfo(data)
         //this.init()
     },
     init:function()

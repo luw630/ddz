@@ -1,6 +1,9 @@
-var REQUEST_SERVER_URL1="http://texasversvrlist.juzhongjoy.com:4324/svrlist.php?"
-var REQUEST_SERVER_URL2="http://texasversvrlist1.juzhongjoy.com:4324/svrlist.php?"
-var REQUEST_SERVER_URL3="http://106.75.142.167:4324/svrlistnew.php?"
+var REQUEST_SERVER_URL1="http://doudizhuver.juzhongjoy.cn:4324/svrlist.php?"
+var REQUEST_SERVER_URL2="http://doudizhuve1.juzhongjoy.cn:4324/svrlist.php?"
+var REQUEST_SERVER_URL3="http://doudizhuver-b.juzhongjoy.cn:4324/svrlist.php?"
+var REQUEST_SERVER_URL4="http://doudizhuver-n.juzhongjoy.cn:4324/svrlist.php?"
+var Max_Request_Num=4
+var Max_Try_Times=3
 var FLIST = "flist"
 var VERSION ="version"
 var UPDATEDIR = "upd"
@@ -62,14 +65,16 @@ cc.Class({
     onLoad: function () {
         this._super()
         var self=this
-        this.btn_Left.node.on(cc.Node.EventType.TOUCH_END, function (event) {
+        this.btn_Left.node.on(cc.Node.EventType.TOUCH_END, function (event) 
+        {
             if (self._leftEvent!=null)
             {
                 self._leftEvent()
             }
             self.hideAlert()
         })
-        this.btn_Right.node.on(cc.Node.EventType.TOUCH_END, function (event) {
+        this.btn_Right.node.on(cc.Node.EventType.TOUCH_END, function (event) 
+        {
             if (self._rightEvent!=null)
             {
                 self._rightEvent()
@@ -77,19 +82,19 @@ cc.Class({
             self.hideAlert()
         })
         this._startTime=global.GHelper.getLocalTime()
-        this.lbl_version.string = "";
-        this.progressBar.node.active=false;
-        this.Layout_Popup.node.active=false;
-        this.retryTimes=0;
-        this._writablePath=jsb.fileUtils.getWritablePath();
-        var updateDir=this._writablePath+UPDATEDIR;
+        this.lbl_version.string = ""
+        this.progressBar.node.active=false
+        this.Layout_Popup.node.active=false
+        this.retryTimes=0
+        this._writablePath=jsb.fileUtils.getWritablePath()
+        var updateDir=this._writablePath+UPDATEDIR
         this._updateDir=updateDir
 	    cc.log("updateDir "+updateDir)
         if (!jsb.fileUtils.isDirectoryExist(updateDir)){
-            jsb.fileUtils.createDirectory(updateDir);
+            jsb.fileUtils.createDirectory(updateDir)
         }
-        jsb.fileUtils.addSearchPath(updateDir+"/");
-        jsb.fileUtils.addSearchPath(updateDir+"/"+LocalLoadPath);
+        jsb.fileUtils.addSearchPath(updateDir+"/")
+        jsb.fileUtils.addSearchPath(updateDir+"/"+LocalLoadPath)
         this._needRestart=false
         this.getLocalPlatform(this.checkNewInstall.bind(this))
     },
@@ -187,14 +192,23 @@ cc.Class({
             }
         })
     },
-     
+    sendConfigRequest:function(){   //同时发3个链接
+            this.retryTimes=0
+            var url=this.getConfigUrl(REQUEST_SERVER_URL1)
+            this.sendRequest(url,RequestTypes.CONFIG,1)
+            url=this.getConfigUrl(REQUEST_SERVER_URL2)
+            this.sendRequest(url,RequestTypes.CONFIG,1)
+            url=this.getConfigUrl(REQUEST_SERVER_URL3)
+            this.sendRequest(url,RequestTypes.CONFIG,1)
+            url=this.getConfigUrl(REQUEST_SERVER_URL4)
+            this.sendRequest(url,RequestTypes.CONFIG,1)
+    },
     handleNewInstall:function(){  
         if(this._updVersion==null )
         {
             this._localVersion=this._resVersion
             this.lbl_version.string =global.GLocalizationDataModel.getStringByKey("Current_Version")+ this._localVersion.version;
-            var url=this.getConfigUrl()
-            this.sendRequest(url,RequestTypes.CONFIG)
+            this.sendConfigRequest()
             return
         }
         if (this._resVersion.core!=this._updVersion.core)
@@ -210,24 +224,35 @@ cc.Class({
             this._localVersion=this._updVersion
         }
         this.lbl_version.string =global.GLocalizationDataModel.getStringByKey("Current_Version")+ this._localVersion.version;
-        var url=this.getConfigUrl()
-        this.sendRequest(url,RequestTypes.CONFIG)
+        this.sendConfigRequest()
     },
 
-    sendRequest:function(url,type){
+    sendRequest:function(url,type,sendTimes){
         this.retryTimes=this.retryTimes+1
+        cc.log("retryTimes  "+this.retryTimes+"  "+url)
         var xhr = new XMLHttpRequest();
         var self=this
         this.updateProgress(type)
+        xhr.timeout = 3000;
         xhr.onload=function(){
-            self.requestEnd(xhr,url,type);
+            self.requestEnd(xhr,url,type,sendTimes);
+        }
+        xhr.ontimeout=function(){
+            self.requestEnd(xhr,url,type,sendTimes);
         }
         xhr.responseType = "arraybuffer";
         xhr.open("GET", url, true);
         xhr.send();
     },
 
-    requestEnd:function(xhr,url,type){
+    requestEnd:function(xhr,url,type,sendTimes){
+        if (type==RequestTypes.CONFIG)
+        {
+            if (this._isGetConfig==true)
+            {
+                return
+            }
+        }
         if (xhr.readyState == 4 && (xhr.status >= 200 && xhr.status < 400)) {
                 var response = xhr.responseText;
                 var responseType="text"
@@ -237,25 +262,32 @@ cc.Class({
                     response=xhr.response
                     responseType="bin"
                 }
+                if (type==RequestTypes.CONFIG)
+                {
+                    this._isGetConfig=true
+                }
+
                 this.onRequestResult(type,response,responseType)
         }else
         {
-           this.requestFailed(url,type)
+           this.requestFailed(url,type,sendTimes)
         }
 
     },
 
-    requestFailed:function(url,type){
+    requestFailed:function(url,type,sendTimes){
         if (type==RequestTypes.CONFIG){
-            var url=this.getConfigUrl()
-            if (url==null){
+            if (this._isGetConfig==true)
+            {
+                return
+            }
+            cc.log("this.retryTimes  "+this.retryTimes)
+            if (this.retryTimes>=Max_Request_Num*Max_Try_Times){
                 var des=global.GLocalizationDataModel.getStringByKey("Error_GetServer_Config")
                 var left=global.GLocalizationDataModel.getStringByKey("Btn_Retry")
                 var right=global.GLocalizationDataModel.getStringByKey("Btn_Exit")
                 this._leftEvent=function(){
-                    this.retryTimes=0
-                    var url2=this.getConfigUrl()
-                    this.sendRequest(url2,RequestTypes.CONFIG)
+                    this.sendConfigRequest()
                 }
                 this._rightEvent=function(){
                     this.exitGame()
@@ -263,7 +295,13 @@ cc.Class({
                 this.showAlert( des, left,right, this.doUpdatePopUp)
                 return
             }
-            this.retryRequestWithDelay(url, type,0)
+            cc.log("sendTimes   "+sendTimes)
+            sendTimes=sendTimes+1
+            if (sendTimes>Max_Try_Times)
+            {
+                return
+            }
+            this.sendRequest(url,RequestTypes.CONFIG,sendTimes)
         }else{
             var index=this._downLoadingIndex
             var pre=this._updateUrl
@@ -311,17 +349,7 @@ cc.Class({
         
     },
 
-    getConfigUrl:function(){
-        var pre=REQUEST_SERVER_URL1
-        if (this.retryTimes<=2){
-            pre=REQUEST_SERVER_URL1
-        }else if (this.retryTimes<=4){
-            pre=REQUEST_SERVER_URL2
-        }else if (this.retryTimes<=6){
-            pre=REQUEST_SERVER_URL3
-        }else{
-            return null
-        }
+    getConfigUrl:function(pre){
         var tempUrl="edition="+this.platform.EDITION+"&clientver="+this._localVersion.version+"&platform="+this.platform.PLATFORM+"&channel="+this.platform.CHANNEL;
         var url=pre+tempUrl
         return url
@@ -458,7 +486,6 @@ cc.Class({
             lbl_right.string=right
    },
   hideAlert:function(){
-            cc.log("xxxxxxxxxxxxxxxxxxxxxxxxxxxx")
             this.Layout_Popup.node.active=false
    },
    getMessureSize:function(size){
@@ -570,9 +597,7 @@ cc.Class({
 	    cc.log("updateDir "+updateDir)
         jsb.fileUtils.addSearchPath(updateDir+"/");
         var filePath=updateDir+"/"+FLIST+".json";
-        cc.log( "1111111111111" + updateDir )
         var data=jsb.fileUtils.getStringFromFile(filePath)
-        cc.log( "222222222222" + updateDir )
         return data
     },
 
@@ -748,7 +773,6 @@ cc.Class({
         global.GPageMgr.openPage("Page_ServerList")
         global.GPageMgr.closePage("Page_Update")
     },
-
     restart:function(){
         cc.log("restart------------")
         cc.sys.localStorage.setItem("is_restart", "true")

@@ -9,9 +9,9 @@ cc.Class({
         _glProgram_state:null,
         totalTime:0.5,
         interval:1.5,
-        mask_rotation:45/360*3.14,
+        mask_rotation:-45,
         mask_start:new cc.Vec2(-300,300),
-        mask_end:new cc.Vec2(300,-300),
+        mask_end:new cc.Vec2(500,-500),
         _curInterval:0,
         _curTime:0,
     }, 
@@ -43,6 +43,7 @@ cc.Class({
             this._curTime-=this.totalTime
         }
         
+        this._program.use()
         if (cc.sys.isNative)
         {
             this._glProgram_state.setUniformFloat( "curTime",  this._curTime)
@@ -51,7 +52,6 @@ cc.Class({
         {
             this._program.setUniformLocationWith1f( "curTime", this._curTime )
         }
-        this._program.use()
     },
     updateGLParameters()
     {
@@ -86,6 +86,7 @@ cc.Class({
         var url = cc.url.raw("resources/ShaderImage/light.png")
         cc.textureCache.addImage(url,function(tex)
         {
+            self._program.use()
             var mask_rotation = self._program.getUniformLocationForName( "mask_rotation" )
             var mask_start = self._program.getUniformLocationForName( "mask_start" )
             var mask_end = self._program.getUniformLocationForName( "mask_end" )
@@ -93,10 +94,11 @@ cc.Class({
             var node_size = self._program.getUniformLocationForName( "node_size" )
             var totalTime = self._program.getUniformLocationForName( "totalTime" )
             var curTime = self._program.getUniformLocationForName( "curTime" )
+            var r = self.mask_rotation/360*3.14
             if (cc.sys.isNative) 
             {
                 self._glProgram_state.setUniformTexture( "mask_texCoord", tex )
-                self._glProgram_state.setUniformFloat( mask_rotation, self.mask_rotation)
+                self._glProgram_state.setUniformFloat( mask_rotation, r)
                 self._glProgram_state.setUniformVec2( mask_start, self.mask_start )
                 self._glProgram_state.setUniformVec2( mask_end, self.mask_end )
                 self._glProgram_state.setUniformVec2( mask_size, new cc.Vec2(tex.width,tex.height) )
@@ -106,7 +108,7 @@ cc.Class({
             }
             else
             {
-                self._program.setUniformLocationWith1f( mask_rotation,self.mask_rotation )
+                self._program.setUniformLocationWith1f( mask_rotation,r )
                 self._program.setUniformLocationWith2f( mask_start, self.mask_start.x,self.mask_start.y )
                 self._program.setUniformLocationWith2f( mask_end, self.mask_end.x,self.mask_end.y )
                 self._program.setUniformLocationWith2f( mask_size, tex.width,tex.height )

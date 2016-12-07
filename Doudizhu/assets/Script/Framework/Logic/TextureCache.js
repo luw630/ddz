@@ -1,46 +1,47 @@
+var _cacheList=
+[
+    "Image/Num",
+    "Image/Card"
+]
 global.GTextureCache =
 {
+    _cacheAtlas:{},
     init:function(callback)
     {
-        this._cacheAll(callback)
-    },
-    _cacheAll:function(callback)
-    {
-        this._cacheNum(callback)
-    },
-    _cacheNum:function(callback)
-    {
-        var prePath = "Image/Num/"
-        var downLoadNum = 0
-        var nums=["1","2","3","4","5","6","7","8","9",".","+","-"]//忽略0是因为0用来试探的时候已经缓存了
-        global.core.foreach(30,function(i)//目前最多支持30标号的数字缓存
+        this._num = _cacheList.length
+        for(var i in _cacheList)
         {
-            var _prePath = prePath+i+"_"
-            ++downLoadNum
-            global.GHelper.createSpriteFrame(_prePath+"0",function(sf)
+            this._cacheOne(_cacheList[i],callback)
+        }
+    },
+    _cacheOne:function(path,callback)
+    {
+        var self = this
+        cc.loader.loadRes(path, cc.SpriteAtlas, function(err, atlas){
+            --self._num
+            if(self._num==0&&callback)
             {
-                --downLoadNum
-                if(downLoadNum<=0&&callback)
-                {
-                    callback()
-                }
-                if(!sf)//该标号文字不存在
-                {
-                    return
-                }
-                global.core.foreach(nums,function(i,ch)
-                {
-                    ++downLoadNum
-                    global.GHelper.createSpriteFrame(_prePath+ch,function(sf)
-                    {
-                        --downLoadNum
-                        if(downLoadNum<=0&&callback)
-                        {
-                            callback()
-                        }
-                    })
-                })
-            })
+                callback()
+            }
+            if (err)
+            {
+                cc.log(err)
+                return
+            }
+            self._cacheAtlas[path] = atlas
         })
-    }
+    },
+    getAtlas:function(path)
+    {
+        return this._cacheAtlas[path]
+    },
+    getSpriteFrame:function(atlasPath,key)
+    {
+        var atlas = this.getAtlas(atlasPath)
+        if(!atlas)
+        {
+            return null
+        }
+        return atlas.getSpriteFrame(key)
+    },
 }

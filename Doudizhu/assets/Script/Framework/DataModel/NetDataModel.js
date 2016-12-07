@@ -14,15 +14,19 @@ global.GNetDataModel = {
     dt_server_time : 0,//和服务器得时间差
     _ping_cb:null,//
     _tip:"",
+    _platformList:[],
+    _curPlatformIndex:0,
     _platformCfg:
     {
         host:"texasversvrlist.juzhongjoy.com",
         port:9088,
         state:global.ENetState.None,
     },
+    _gameLoginList:[],
+    _curGameLoginIndex:0,
     _gameLoginCfg:
     {
-        host:"192.168.6.221",   //host:"192.168.6.221",
+        host:"192.168.6.213", //213
         port:8889,
         state:global.ENetState.None,
     },
@@ -54,8 +58,17 @@ global.GNetDataModel = {
     {
         this._gameServerCfgs = gameServerCfgs
     },
-    getPlatformCfg:function(host,port)
-    {
+    getPlatformCfg:function()
+    {   
+        var len = this._platformList.length
+        if(this._curPlatformIndex>=len)
+        {
+            this._curPlatformIndex = 0
+        }
+        var glc = this._platformList[this._curPlatformIndex]
+        this._curPlatformIndex=this._curPlatformIndex+1
+        var platformArray=global.GHelper.seprarateIpAndPort(glc)
+        this.setPlatformCfg(platformArray[0],platformArray[1])
         return this._platformCfg
     },
     resetGameServerIndex:function()
@@ -80,6 +93,15 @@ global.GNetDataModel = {
     },
     getGameLoginCfg:function()
     {
+        var len = this._gameLoginList.length
+        if(this._curGameLoginIndex>=len)
+        {
+            this._curGameLoginIndex = 0
+        }
+        var glc = this._gameLoginList[this._curGameLoginIndex]
+        this._curGameLoginIndex=this._curGameLoginIndex+1
+        var gameLoginArray=global.GHelper.seprarateIpAndPort(glc)
+        this.setGameLoginCfg(gameLoginArray[0],gameLoginArray[1])
         return this._gameLoginCfg
     },
     getCurCfg:function()
@@ -165,5 +187,24 @@ global.GNetDataModel = {
         }
         str += this._curCfg.host+" "+this._curCfg.port
         return str
-    }
+    },
+
+    getPlatformList:function()
+    {
+        return this._platformList
+    },
+
+    setPlatformList:function(list)
+    {
+         this._platformList=list
+    },
+    getGameLoginList:function()
+    {
+        return this._gameLoginList
+    },
+    setGameLoginList:function(list)
+    {
+         this._gameLoginList=list
+    },
+
 }

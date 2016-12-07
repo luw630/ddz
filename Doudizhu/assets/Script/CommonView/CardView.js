@@ -72,16 +72,16 @@ cc.Class({
         if (this.Suit == 4)
             this.Point = this.Point == 0 ? global.EJoker.JokerA : global.EJoker.JokerB
 
-        var texture = global.GTextureMgr.getTextureByCardNum(this.CardNum)
-        if (texture.sp_point)
+        var texture = global.GCardCache.getTextureByCardNum(this.CardNum)
+        if (texture && texture.sp_point)
         {
             this.sp_point = global.GHelper.createSprite(texture.sp_point)
         }
-        if (texture.sp_lefttop)
+        if (texture && texture.sp_lefttop)
         {
             this.sp_suit_top = global.GHelper.createSprite(texture.sp_lefttop)
         }
-        if (texture.sp_center)
+        if (texture && texture.sp_center)
         {
             this.sp_suit_center = global.GHelper.createSprite(texture.sp_center)
         }
@@ -110,6 +110,15 @@ cc.Class({
     showBackLog:function(flag)
     {
         this.nd_back_log.active = flag
+        if (flag)
+        {
+            var sf = global.GCardCache.getBackLogoSpriteFrame()
+            var sp = this.nd_back_log.getComponent("cc.Sprite")
+            if (sp && sf)
+            {
+                sp.spriteFrame = sf
+            }
+        }
     },
     showRightTopTag:function()
     {//地主的tag

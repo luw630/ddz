@@ -1,16 +1,17 @@
 {
         "1":{
                 "Name":"斗地主宝宝服务器",
-                "IP":"192.168.6.217",
-                "Port":"8889",
-		"PlatFormIP":"texasversvrlist.juzhongjoy.com",
-		"PlatFormPort":"9088"
+                "GameLogins":["192.168.6.217:8889"],
+                "PlatForms":["texasversvrlist.juzhongjoy.com:9088"]
         },
         "2":{
                 "Name":"斗地主测试服务器",
-                "IP":"192.168.6.221",
-                "Port":"8889",
-		"PlatFormIP":"texasversvrlist.juzhongjoy.com",
-		"PlatFormPort":"9088"
+                "GameLogins":["192.168.6.221:8889"],
+                "PlatForms":["texasversvrlist.juzhongjoy.com:9088"]
+        },
+        "3":{
+                "Name":"斗地主外网测试服",
+                "GameLogins":["106.75.84.42:8889"],
+                "PlatForms":["106.75.7.48:9088"]
         }
 }

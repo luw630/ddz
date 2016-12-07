@@ -24,7 +24,7 @@ global.GPlayerDataModel =
         this.observeTargetRid = 0
         for (var key in seatsInfo)
         {
-            if (seatsInfo[key].index == global.DefaultObserveSeatIndex)
+            if (seatsInfo[key].index == global.EDefaultObserveSeatIndex)
             {
                 this.observeTargetRid = seatsInfo[key].rid
             }

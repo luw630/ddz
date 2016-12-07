@@ -8,6 +8,10 @@ global.NetPlatform = cc.Class({
     },
     onClose:function()
     {
+        global.GNetDataModel.setState(this._host,this._port,global.ENetState.Closed)
+        var cfg = global.GNetDataModel.getPlatformCfg()
+        this._host = cfg.host
+        this._port = cfg.port
         var need_recon = this._super()
         if(!need_recon)
         {
@@ -38,10 +42,6 @@ global.NetPlatform = cc.Class({
             {
                 global.GHelper.showTip("Error_"+jsonData.retmsg)
             }
-            if(global.GNetGameServer)
-            {
-                global.GNetGameServer.close()
-            }
             global.GPlatformDataModel.authType=global.EAuthType.JuZhong
             var page=global.GPageMgr.getPage("Page_Login")
             if(page)
@@ -50,6 +50,11 @@ global.NetPlatform = cc.Class({
             }
             //global.GHelper.clearTip()
             this.close()
+            var page = global.GPageMgr.getPage("Page_Login")
+            if (page)
+            {
+                page.setLimitClickPanelEnable(false)
+            }
             return
         }
 

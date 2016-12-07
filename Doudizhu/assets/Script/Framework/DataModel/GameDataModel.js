@@ -1,7 +1,12 @@
 global.EGameState =
 {
-    Entering:0
+    Entering:0,
+    Main:0,
+    Table:1,
+    //Leaving_Table:2,
+    Entering_Table:3
 }
+
 global.GGameDataModel =
 {
     isDev : false,//是否开发模式

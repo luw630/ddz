@@ -63,6 +63,21 @@ void main( void )
     v_texCoord_pixel.x = v_texCoord.x*node_size.x-curPos.x;
     v_texCoord_pixel.y = v_texCoord.y*node_size.x-curPos.y;
     //当前点的像素位置旋转到未旋转的位置（及逆旋转到正位置）
+    float s, c;
+    if ( mask_rotation == 0.0 )
+    {
+        s = 0.0;
+        c = 1.0;
+    }
+    else
+    {
+        s = sin( mask_rotation );
+        c = cos( mask_rotation );
+    }
+    float y = v_texCoord_pixel.y*c+v_texCoord_pixel.x*s;
+    float x = v_texCoord_pixel.x*c-v_texCoord_pixel.y*s;
+    v_texCoord_pixel.x = x;
+    v_texCoord_pixel.y = y;
     //转换成mask内部的相对点
     vec2 v_mask_texCoord;
     v_mask_texCoord.x = v_texCoord_pixel.x/mask_size.x;

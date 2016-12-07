@@ -224,5 +224,8 @@
     },
     "HAVE_NOT_ENOUGH_COIN": {
         "cn": "您的金币已不足"
+    },
+    "Game_Is_Not_Started": {
+        "cn": "比赛还未开始"
     }
 }	

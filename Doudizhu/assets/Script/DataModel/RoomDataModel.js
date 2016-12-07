@@ -169,7 +169,7 @@ global.GRoomDataModel =
 
         var state = global.GPlayerDataModel.getPlayerState()
         if (state == global.EPlayerState.Observe_Game
-            && temp.index == global.DefaultObserveSeatIndex)
+            && temp.index == global.EDefaultObserveSeatIndex)
         {//观战状态重新设置观战目标;
             global.GPlayerDataModel.setObservedRid( temp.rid )
         }

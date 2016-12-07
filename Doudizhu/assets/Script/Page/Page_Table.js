@@ -85,6 +85,10 @@ cc.Class({
             default: null,
             type: cc.Label
         },
+        nd_table_id:{
+            default: null,
+            type: cc.Node
+        },
 
         tuoguan_panel: {            //托管顶层;
             default: null,
@@ -94,7 +98,7 @@ cc.Class({
             default: null,
             type: cc.Node
         },
-        nd_SwitchTableBtn: {
+        nd_Switch_Table: {
             default: null,
             type: cc.Node
         },
@@ -147,6 +151,10 @@ cc.Class({
             type: cc.Button
         },
         btn_three_scroe:{
+            default: null,
+            type: cc.Button
+        },
+        btn_chat:{
             default: null,
             type: cc.Button
         },
@@ -224,8 +232,8 @@ cc.Class({
         }
         global.GPageDataModel.clearPageNotice("Page_Table")
 
-        global.GAudioTool.playMusic("Audio/table_music.mp3",true)
-        cc.audioEngine.stopMusic(true)
+        //global.GAudioTool.playMusic("Audio/table_music.mp3",true)
+        global.GAudioTool.stopMusic(true)
     },
 
     dealCardsAniScheduler:function(delta)
@@ -2542,6 +2550,33 @@ cc.Class({
         this.showTopCards()             //显示底牌;
         this.showSeatCardsOfLastTurn()  //显示对应座位打出的牌;
         this.onSomeoneTurn()            //玩家动作执行;
+        this.showChatBtn()              //语音按钮显示;
+        this.showSwitchTableBtn()       //换桌按钮;
+    },
+    showChatBtn:function()
+    {
+        var state = global.GPlayerDataModel.getPlayerState()
+        if (state == global.EPlayerState.Observe_Game)
+        {
+            this.btn_chat.node.active = false
+        }
+        else if (state == global.EPlayerState.Normal)
+        {
+            this.btn_chat.node.active = true
+        }
+    },
+    showSwitchTableBtn:function()
+    {
+        var gameinfo = global.GRoomDataModel.getGameInfo()
+        if (!gameinfo) return
+        if (gameinfo.room_type==global.ERoomType.ROOM_TYPE_FRIEND_COMMON)
+        {
+            this.nd_Switch_Table.active = false
+        }
+        else
+        {
+            this.nd_Switch_Table.active = true
+        }
     },
     refreshTuoguanAndWatching:function()
     {
@@ -2551,11 +2586,11 @@ cc.Class({
             this.nd_watching.active = true
             this.nd_TuoguanBtn.active = false
             this.tuoguan_panel.active = false
-            this.nd_SwitchTableBtn.active = false
+            this.nd_Switch_Table.active = false
         }
         else if (state == global.EPlayerState.Normal)
         {
-            this.nd_SwitchTableBtn.active = true
+            this.nd_Switch_Table.active = true
             this.nd_watching.active = false
             var self_rid = global.GPlayerDataModel.getRid()
             var role = global.GRoomDataModel.getRoleByRid(self_rid)
@@ -2641,9 +2676,17 @@ cc.Class({
         }
         var gameinfo = global.GRoomDataModel.getGameInfo()
         if (gameinfo && (gameinfo.room_type==global.ERoomType.ROOM_TYPE_FRIEND_COMMON))
+        {
+            this.nd_table_id.active = true
             this.lbl_create_table_id.string = gameinfo.create_table_id
+            this.nd_Switch_Table.active = false
+        }
         else
+        {
+            this.nd_table_id.active = false
             this.lbl_create_table_id.node.active = false
+            this.nd_Switch_Table.active = true
+        }
     },
     resetBubbles:function()
     {//隐藏RV的气泡;
@@ -2663,7 +2706,8 @@ cc.Class({
     {
         if (global.GRoomDataModel.getIsInGame() == false)
         {
-            global.GHelper.showTip("Game is not started")
+            var str = global.GLocalizationDataModel.getStringByKey("Game_Is_Not_Started")
+            global.GHelper.showTip(str)
             return
         }
         var gameinfo = global.GRoomDataModel.getGameInfo()
@@ -2696,7 +2740,7 @@ cc.Class({
             this.nd_watching.active = true
             this.nd_TuoguanBtn.active = false
             this.tuoguan_panel.active = false
-            this.nd_SwitchTableBtn.active = false
+            this.nd_Switch_Table.active = false
             return
         }
         this.nd_TuoguanBtn.active = !flag

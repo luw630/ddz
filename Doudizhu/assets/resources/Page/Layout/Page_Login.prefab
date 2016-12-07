@@ -56,6 +56,9 @@
       },
       {
         "__id__": 50
+      },
+      {
+        "__id__": 55
       }
     ],
     "_rotationX": 0,
@@ -77,11 +80,11 @@
     "_active": true,
     "_components": [
       {
-        "__id__": 55
+        "__id__": 59
       }
     ],
     "_prefab": {
-      "__id__": 56
+      "__id__": 60
     },
     "groupIndex": 0
   },
@@ -702,7 +705,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 710,
+      "x": 706,
       "y": 436
     },
     "_skewX": 0,
@@ -732,7 +735,7 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_string": "15982186611",
+    "_string": "",
     "editingDidBegan": [],
     "textChanged": [],
     "editingDidEnded": [],
@@ -1059,7 +1062,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 710,
+      "x": 709,
       "y": 364
     },
     "_skewX": 0,
@@ -1089,7 +1092,7 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_string": "123456",
+    "_string": "",
     "editingDidBegan": [],
     "textChanged": [],
     "editingDidEnded": [],
@@ -1769,6 +1772,148 @@
     "sync": false
   },
   {
+    "__type__": "cc.Node",
+    "_name": "limit_click_panel",
+    "_objFlags": 0,
+    "_opacity": 23,
+    "_color": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "_cascadeOpacityEnabled": true,
+    "_parent": {
+      "__id__": 1
+    },
+    "_anchorPoint": {
+      "__type__": "cc.Vec2",
+      "x": 0.5,
+      "y": 0.5
+    },
+    "_contentSize": {
+      "__type__": "cc.Size",
+      "width": 1336,
+      "height": 750
+    },
+    "_children": [],
+    "_rotationX": 0,
+    "_rotationY": 0,
+    "_scaleX": 1,
+    "_scaleY": 1,
+    "_position": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_skewX": 0,
+    "_skewY": 0,
+    "_localZOrder": 0,
+    "_globalZOrder": 0,
+    "_tag": -1,
+    "_opacityModifyRGB": false,
+    "_id": "",
+    "_active": true,
+    "_components": [
+      {
+        "__id__": 56
+      },
+      {
+        "__id__": 57
+      }
+    ],
+    "_prefab": {
+      "__id__": 58
+    },
+    "groupIndex": 0
+  },
+  {
+    "__type__": "cc.Sprite",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 55
+    },
+    "_enabled": true,
+    "_spriteFrame": {
+      "__uuid__": "a23235d1-15db-4b95-8439-a2e005bfff91"
+    },
+    "_type": 0,
+    "_sizeMode": 0,
+    "_fillType": 0,
+    "_fillCenter": {
+      "__type__": "cc.Vec2",
+      "x": 0,
+      "y": 0
+    },
+    "_fillStart": 0,
+    "_fillRange": 0,
+    "_isTrimmedMode": true,
+    "_srcBlendFactor": 770,
+    "_dstBlendFactor": 771,
+    "_atlas": null
+  },
+  {
+    "__type__": "cc.Button",
+    "_name": "",
+    "_objFlags": 0,
+    "node": {
+      "__id__": 55
+    },
+    "_enabled": true,
+    "transition": 0,
+    "pressedColor": {
+      "__type__": "cc.Color",
+      "r": 211,
+      "g": 211,
+      "b": 211,
+      "a": 255
+    },
+    "hoverColor": {
+      "__type__": "cc.Color",
+      "r": 255,
+      "g": 255,
+      "b": 255,
+      "a": 255
+    },
+    "duration": 0.1,
+    "pressedSprite": null,
+    "hoverSprite": null,
+    "clickEvents": [],
+    "_N$interactable": true,
+    "_N$normalColor": {
+      "__type__": "cc.Color",
+      "r": 214,
+      "g": 214,
+      "b": 214,
+      "a": 255
+    },
+    "_N$disabledColor": {
+      "__type__": "cc.Color",
+      "r": 124,
+      "g": 124,
+      "b": 124,
+      "a": 255
+    },
+    "_N$normalSprite": null,
+    "_N$disabledSprite": null,
+    "_N$target": {
+      "__id__": 55
+    }
+  },
+  {
+    "__type__": "cc.PrefabInfo",
+    "root": {
+      "__id__": 1
+    },
+    "asset": {
+      "__uuid__": "e8a652a0-b43e-4608-987d-3a892bcacb99"
+    },
+    "fileId": "f3b1bYaM4RHtYKICrfI4WXR",
+    "sync": false
+  },
+  {
     "__type__": "2068duZxNRBgoU+++x23pVF",
     "_name": "",
     "_objFlags": 0,
@@ -1781,6 +1926,9 @@
     },
     "eb_pwd": {
       "__id__": 32
+    },
+    "limit_click_panel": {
+      "__id__": 55
     }
   },
   {

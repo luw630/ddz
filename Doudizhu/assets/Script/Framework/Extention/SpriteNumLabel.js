@@ -100,12 +100,16 @@ global.SpriteNumLabel = cc.Class({
             }
             length = numStr.length
         }
-        var key = "Image/Num/" + this._numType + "_"
-        global.GHelper.createSprite(key+0, function(sp)
+        //var key = "Image/Num/" + this._numType + "_"
+        var sf = global.GTextureCache.getNumSpriteFrame(0, this._numType)
+        if (sf)
         {
-            var rect = sp.spriteFrame.getRect()
-            self._init(numStr,rect)
-        })
+            global.GHelper.createSprite(sf, function(sp)
+            {
+                var rect = sp.spriteFrame.getRect()
+                self._init(numStr,rect)
+            })
+        }
     },
     _init:function(numStr,rect)
     {
@@ -129,7 +133,7 @@ global.SpriteNumLabel = cc.Class({
         }
         var width = 0
         var height = 0
-        var key = "Image/Num/" + this._numType + "_"
+        //var key = "Image/Num/" + this._numType + "_"
         var length= numStr.length
         for(var i = 0; i<length;++i)
         {
@@ -138,14 +142,18 @@ global.SpriteNumLabel = cc.Class({
             {
                 s="X"
             }
-            var sp = global.GHelper.createSprite(key + s)
-            sp.node.parent = this.node
-            sp.node.setPosition(width, 0)
-            width += rect.width + 2 * offsetX
-            var h = sp.node.height
-            if(height < h)
+            var sf = global.GTextureCache.getNumSpriteFrame(s, this._numType)
+            if (sf)
             {
-                height = h
+                var sp = global.GHelper.createSprite(sf)
+                sp.node.parent = this.node
+                sp.node.setPosition(width, 0)
+                width += rect.width + 2 * offsetX
+                var h = sp.node.height
+                if(height < h)
+                {
+                    height = h
+                }
             }
         }
         this.width = width

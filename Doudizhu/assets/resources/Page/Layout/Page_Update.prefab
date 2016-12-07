@@ -623,7 +623,7 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 350,
+      "width": 500,
       "height": 15
     },
     "_children": [],
@@ -730,7 +730,7 @@
     },
     "_N$mode": 0,
     "_N$totalLength": 100,
-    "_N$progress": 0.7,
+    "_N$progress": 1,
     "_N$reverse": false
   },
   {
@@ -908,9 +908,9 @@
     "_opacity": 255,
     "_color": {
       "__type__": "cc.Color",
-      "r": 86,
-      "g": 170,
-      "b": 75,
+      "r": 255,
+      "g": 255,
+      "b": 255,
       "a": 255
     },
     "_cascadeOpacityEnabled": true,
@@ -924,8 +924,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 500,
-      "height": 250
+      "width": 554,
+      "height": 322
     },
     "_children": [],
     "_rotationX": 0,
@@ -964,10 +964,10 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "d5ed7d0e-6362-47a0-8198-14dc3a166afa"
+      "__uuid__": "f3091fe4-6500-487e-98fe-b87b284ee827"
     },
     "_type": 0,
-    "_sizeMode": 0,
+    "_sizeMode": 2,
     "_fillType": 0,
     "_fillCenter": {
       "__type__": "cc.Vec2",
@@ -976,7 +976,7 @@
     },
     "_fillStart": 0,
     "_fillRange": 0,
-    "_isTrimmedMode": true,
+    "_isTrimmedMode": false,
     "_srcBlendFactor": 770,
     "_dstBlendFactor": 771,
     "_atlas": null
@@ -1102,8 +1102,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
-      "height": 40
+      "width": 161,
+      "height": 60
     },
     "_children": [
       {
@@ -1116,7 +1116,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": -80,
+      "x": -120,
       "y": -10
     },
     "_skewX": 0,
@@ -1164,7 +1164,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 100,
-      "height": 23
+      "height": 28
     },
     "_children": [],
     "_rotationX": 0,
@@ -1203,9 +1203,9 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 20,
-    "_fontSize": 20,
-    "_lineHeight": 23,
+    "_actualFontSize": 24,
+    "_fontSize": 24,
+    "_lineHeight": 28,
     "_enableWrapText": false,
     "_N$file": {
       "__uuid__": "f74f08d0-166e-4b2d-bf60-5aae47b3e810"
@@ -1236,7 +1236,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "b36fb141-c553-4fa7-9500-b9faeb6c0292"
+      "__uuid__": "7d2e01d5-ac44-4a63-9413-153a18d19100"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -1300,7 +1300,7 @@
       "a": 255
     },
     "_N$normalSprite": {
-      "__uuid__": "b36fb141-c553-4fa7-9500-b9faeb6c0292"
+      "__uuid__": "7d2e01d5-ac44-4a63-9413-153a18d19100"
     },
     "_N$disabledSprite": {
       "__uuid__": "34c8b3a4-6997-4ef6-abe4-7d15ab174da1"
@@ -1343,8 +1343,8 @@
     },
     "_contentSize": {
       "__type__": "cc.Size",
-      "width": 100,
-      "height": 40
+      "width": 161,
+      "height": 60
     },
     "_children": [
       {
@@ -1357,7 +1357,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 80,
+      "x": 119,
       "y": -10
     },
     "_skewX": 0,
@@ -1405,7 +1405,7 @@
     "_contentSize": {
       "__type__": "cc.Size",
       "width": 100,
-      "height": 23
+      "height": 28
     },
     "_children": [],
     "_rotationX": 0,
@@ -1444,9 +1444,9 @@
     },
     "_enabled": true,
     "_useOriginalSize": false,
-    "_actualFontSize": 20,
-    "_fontSize": 20,
-    "_lineHeight": 23,
+    "_actualFontSize": 24,
+    "_fontSize": 24,
+    "_lineHeight": 28,
     "_enableWrapText": false,
     "_N$file": {
       "__uuid__": "f74f08d0-166e-4b2d-bf60-5aae47b3e810"
@@ -1477,7 +1477,7 @@
     },
     "_enabled": true,
     "_spriteFrame": {
-      "__uuid__": "b36fb141-c553-4fa7-9500-b9faeb6c0292"
+      "__uuid__": "e258aba7-5921-4b36-846b-cf5269862fc4"
     },
     "_type": 1,
     "_sizeMode": 0,
@@ -1541,7 +1541,7 @@
       "a": 255
     },
     "_N$normalSprite": {
-      "__uuid__": "b36fb141-c553-4fa7-9500-b9faeb6c0292"
+      "__uuid__": "e258aba7-5921-4b36-846b-cf5269862fc4"
     },
     "_N$disabledSprite": {
       "__uuid__": "34c8b3a4-6997-4ef6-abe4-7d15ab174da1"

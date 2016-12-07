@@ -31,7 +31,9 @@ global.Framework.Game = cc.Class({
         global.GPrefabManager.init()
         global.GSettingDataModel.init()
         global.GTextureCache.init(this.onPreInitDone.bind(this))
-        global.GTextureMgr.init()
+    },
+    onPreInitDone:function()
+    {
         global.GChatCommonData.init()
         //初始化page
         var pageNode = new cc.Node()
@@ -40,10 +42,6 @@ global.Framework.Game = cc.Class({
         //初始化提示条
         global.GTipLabel = global.TipLabel.create()
         global.GTipLabel.node.parent = this.node.parent
-    },
-    onPreInitDone:function()
-    {
-
     }
     // called every frame, uncomment this function to activate update callback
     // update: function (dt) {

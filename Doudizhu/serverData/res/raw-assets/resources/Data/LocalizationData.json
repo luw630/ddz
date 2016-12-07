@@ -1,0 +1,222 @@
+{
+    "Chinese_W":{
+    	"cn":"万"
+    },
+    "Chinese_Y":{
+    	"cn":"亿"
+    },
+    "ConServerIs":{
+    	"cn":"正在连接服务器："
+    },
+    "NetIsInReadySerIs":{
+    	"cn":"网络正处于服务器："
+    },
+    "NetHasClosedSerIs":{
+    	"cn":"网络已经断开于服务器："
+    },
+    "LoginPlatformWait":{
+    	"cn":"正在登录游戏平台，请稍后"
+    },
+    "PlatLoginSuccUIDIs":{
+    	"cn":"游戏平台登录成功，当前用户UID为："
+    },
+    "PlatGuessLogining":{
+    	"cn":"游客账号正在登陆游戏平台:"
+    },
+    "PlatGuessLoginSuccUIDIs":{
+    	"cn":"游客账号登录成功，当前用户UID为："
+    },
+    "RegisteringNameIs":{
+    	"cn":"正在注册账号，当前用户名为： "
+    },
+    "RegSuccUIDIs":{
+    	"cn":"注册账号成功，当前用户UID为： "
+    },
+    "ThirdLoginWait":{
+    	"cn":"第三方账号正在登录，请稍后 "
+    },
+    "ThirdLoginSucc":{
+    	"cn":"第三方登录成功 "
+    },
+    "Geting_Code_OK": {
+        "cn": "验证码已发送，请注意查收"
+    },
+    "MobileRegisteringCurIs":{
+    	"cn":"手机账号正在注册，当前注册平台："
+    },
+    "MobileRegSucc":{
+    	"cn":"手机账号注册成功"
+    },
+    "Reset_Pass_OK": {
+        "cn": "密码重置成功，返回登录界面登录"
+    },
+    "Error_CloseDownAccount":{
+        "cn":"游戏中有不文明现象，永久封号"
+    },
+    "Btn_OK": {
+        "cn": "确定"
+    },
+    "Btn_Delete": {
+        "cn": "删除"
+    },
+    "Btn_Back": {
+        "cn": "返回"
+    },
+    "Btn_Cancle": {
+        "cn": "取消"
+    },
+    "Already_Getting_Code": {
+        "cn": "{0}秒后才能再次发送验证码。"
+    },
+
+    "Btn_Getting_Code": {
+        "cn": " 获取\n验证码"
+    },
+    "Btn_Getting_Code_With_Delay":{
+        "cn":"{0}s\n重新获取"
+    },
+    "Input_Wrong_phone": {
+        "cn": "请先输入正确的手机号"
+    },
+    "Name_Length_Limit": {
+        "cn": "用户名必须是6-20位字符或者数字"
+    },
+    "Pass_is_null": {
+        "cn": "密码不能为空"
+    },
+    "code_is_null": {
+        "cn": "验证码不能为空"
+    },
+    "Name_Have_EmptyChar": {
+        "cn": "用户名不能包含空格"
+    },
+    "Pass_Have_EmptyChar": {
+        "cn": "密码不能包含空格"
+    },
+     "Step_GetServer_Config":{
+        "cn":"获取服务器配置信息"
+    },
+    "Step_GetServer_Version":{
+        "cn":"获取服务器版本信息"
+    },
+    "Step_GetServer_Resource":{
+        "cn":"正在下载资源"
+    },
+    "Step_GetServer_Flist":{
+        "cn":"获取服务器更新资源列表信息"
+    },
+    "Step_GetServer_List":{
+        "cn":"获取服务器列表信息"
+    },
+     "Step_GetServer_NewVersion":{
+        "cn":"发现新版本，前去下载最新版本？"
+    },
+     "Step_GetServer_NewUpdate":{
+        "cn":"资源文件有更新，为了更好的体验，建议您更新"
+    },
+    "Step_GetServer_MustUpdate":{
+        "cn":"资源文件有更新，必须更新后才能继续游戏"
+    },
+     "Current_Version":{
+        "cn":"当前版本："
+    },
+     "Server_Version":{
+        "cn":"服务器版本："
+    },
+    "Error_GetServer_Config":{
+        "cn":"获取服务器配置信息失败\n（错误码 1)"
+    },
+    "Error_GetServer_Version":{
+        "cn":"获取服务器版本信息失败\n（错误码 2)"
+    },
+    "Error_GetServer_Resource":{
+        "cn":"获取服务器更新资源失败\n（错误码 1000)"
+    },
+    "Error_GetServer_Flist":{
+        "cn":"获取服务器版本更新列表失败\n（错误码 3)"
+    },
+     "Error_GetServer_List":{
+        "cn":"获取服务器列表失败\n（错误码 4)"
+    },
+    "base_score":{
+        "cn":"基础分："
+    },
+    "NameDot": {
+        "cn": "·"
+    },
+    "Can_not_leave": {
+        "cn": "比赛开始后,不能离开牌桌"
+    },
+    "Get_Rewards": {
+        "cn": "获得附件："
+    },
+    "Continue_Watch": {
+        "cn": "继续观战"
+    },
+    "Go_Play": {
+        "cn": "参与游戏"
+    },
+    "Seat_Is_Available": {
+        "cn": "房间有空位了"
+    },
+    "Grab_Landlord": {
+        "cn": "抢地主"
+    },
+    "No_Grab_Landlord": {
+        "cn": "不抢"
+    },
+    "Call_Landlord": {
+        "cn": "叫地主"
+    },
+    "No_Call_Landlord": {
+        "cn": "不叫"
+    },
+    "Show_off": {
+        "cn": "炫耀一下"
+    },
+    "Go_Again": {
+        "cn": "再来一局"
+    },
+    "Coin": {
+        "cn": "金币"
+    },
+    "Error_mobilenum_had_reged": {
+        "cn": "电话号码已经被注册"
+    },
+	"Error_password_error": {
+        "cn": "密码错误"
+    },
+	"Error_username_had_reged": {
+        "cn": "用户名已经注册"
+    },
+	"Error_identcode_error": {
+        "cn": "验证码错误"
+    },
+	"Error_username_not_exist": {
+        "cn": "用户名不存在"
+    },
+    "Error_username_not_null": {
+        "cn": "昵称不能为空"
+    },
+	"Error_username_too_low": {
+        "cn": "请至少输入2个汉字或6个英文字母"
+    },
+	"Error_username_too_long": {
+        "cn": "昵称错误，请输入7个汉字或7个英文字母"
+    },
+    "Error_account_has_emptyChar": {
+        "cn": "用户名不能包含空格"
+    },
+    "Erro_account_length_limit": {
+        "cn": "用户名长度不足"
+    },
+	"NoUseSerOrNetNull": {
+        "cn": "网络断线"
+    },
+	"PassTooShortPleMT6": {
+        "cn": "密码长度小于6位"
+    },
+    "Acount_thesameto_pwd": {
+        "cn": "帐号和密码不能相同"
+    }
+}	

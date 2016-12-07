@@ -21,8 +21,8 @@ global.GoogleProtoFilter = cc.Class({
         //公有消息的version信息
         var version = new global.Messages.Version()
         
-        version.setplatform(global.GPlatformDataModel.platform)
-        version.setchannel(global.GPlatformDataModel.channel)
+        version.setplatform(global.GPlatformDataModel.platformId)
+        version.setchannel(global.GPlatformDataModel.channelId)
         version.setversion("1.0.0.1")
         version.setauthtype(global.GPlatformDataModel.authType)
         version.setregfrom(global.GPlatformDataModel.regFrom)

@@ -81,24 +81,28 @@ global.AlphaReverseTimerLabel = cc.Class({
     {
         this._root.removeAllChildren()
         var length = numStr.length
-        var pre_path = "Image/Num/" + this.selectedFont + "_"
+        //var pre_path = "Image/Num/" + this.selectedFont + "_"
         var x = 0
         this._nums = []
         for(var i = 0; i<length; ++i)
         {
-             var sp = global.GHelper.createSprite(pre_path+numStr[i])
-             this._nums.push({sp:sp,str:numStr[i]})
-             sp.node.parent = this._root
-             if(i==0)
-             {
-                 sp.node.x=x
-                 x = sp.node.width/2+this.num_spacing
-             }
-             else
-             {
-                 sp.node.x=x+sp.node.width/2
-                 x += sp.node.width + this.num_spacing 
-             }
+            var sf = global.GTextureCache.getNumSpriteFrame(numStr[i], this.selectedFont)
+            if (sf)
+            {
+                var sp = global.GHelper.createSprite(sf)
+                this._nums.push({sp:sp,str:numStr[i]})
+                sp.node.parent = this._root
+                if(i==0)
+                {
+                    sp.node.x=x
+                    x = sp.node.width/2+this.num_spacing
+                }
+                else
+                {
+                    sp.node.x=x+sp.node.width/2
+                    x += sp.node.width + this.num_spacing 
+                }
+            }
         }
         if(this._init_callback)
         {
@@ -177,17 +181,21 @@ global.AlphaReverseTimerLabel = cc.Class({
         var pre = this._nums[i]
         if(pre.str != str_num)
         {
-            var pre_path = "Image/Num/" + this.selectedFont + "_"
-            var sp = global.GHelper.createSprite(pre_path+str_num)
-            this._nums[i] = {sp:sp,str:str_num}
-            sp.node.parent = this._root
-            sp.node.opacity = 0
-            sp.node.x = pre.sp.node.x
-            sp.node.runAction(cc.fadeTo(0.3,255))
-            pre.sp.node.runAction(cc.sequence(
-                                    cc.fadeTo(0.3,0),
-                                    cc.removeSelf())
-                                    )
+            //var pre_path = "Image/Num/" + this.selectedFont + "_"
+            var sf = global.GTextureCache.getNumSpriteFrame(str_num, this.selectedFont)
+            if (sf)
+            {
+                var sp = global.GHelper.createSprite(sf)
+                this._nums[i] = {sp:sp,str:str_num}
+                sp.node.parent = this._root
+                sp.node.opacity = 0
+                sp.node.x = pre.sp.node.x
+                sp.node.runAction(cc.fadeTo(0.3,255))
+                pre.sp.node.runAction(cc.sequence(
+                                        cc.fadeTo(0.3,0),
+                                        cc.removeSelf())
+                                        )
+            }
         }
     },
     onDestroy:function()

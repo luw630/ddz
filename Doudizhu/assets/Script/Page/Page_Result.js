@@ -77,9 +77,13 @@ cc.Class({
             this.btn_again.node.active = false
             this.btn_Switch_Table.node.active = false
         }
-        
-        this.init()
+        else
+        {//非观战模式的换桌按钮显示;
+            this.showSwitchTableBtn()
+        }
 
+        this.init()
+        
         //遮挡table里的等待准备和准备按钮;
         var page = global.GPageMgr.getPage("Page_Table")
         if (page)
@@ -97,6 +101,19 @@ cc.Class({
     delayToClose:function()
     {
         global.GPageMgr.closePage("Page_Result")
+    },
+    showSwitchTableBtn:function()
+    {
+        var gameinfo = global.GRoomDataModel.getGameInfo()
+        if (!gameinfo) return
+        if (gameinfo.room_type==global.ERoomType.ROOM_TYPE_FRIEND_COMMON)
+        {
+            this.btn_Switch_Table.node.active = false
+        }
+        else
+        {
+            this.btn_Switch_Table.node.active = true
+        }
     },
     init: function()
     {
@@ -164,7 +181,7 @@ cc.Class({
         {
             page.Btn_Again_OnClicked()
         }
-        global.GAudioTool.playMusic("Audio/table_music.mp3",true)
+        //global.GAudioTool.playMusic("Audio/table_music.mp3",true)
     },
     //倒计时;
     onCountDownBegin:function(ready_to_time)
@@ -268,7 +285,7 @@ cc.Class({
                 page.showToReadyOrNot(true)     
             }
         }
-        global.GAudioTool.playMusic("Audio/table_music.mp3",true)
+        //global.GAudioTool.playMusic("Audio/table_music.mp3",true)
 
         global.GPageMgr.closePage("Page_Result")
     },

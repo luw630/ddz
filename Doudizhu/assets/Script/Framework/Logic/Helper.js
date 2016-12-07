@@ -53,6 +53,17 @@ helper.createSprite = function(obj,callback,rect,suffix)
         {
             sp.spriteFrame = obj
         }
+        else
+        {
+            global.GHelper.createSpriteFrame(obj,function(sf)
+            {
+                if(!sf)
+                {
+                    return
+                }
+                sp.spriteFrame = sf
+            },rect,suffix)
+        }
         if(callback)
         {
             callback(sp)
@@ -113,10 +124,6 @@ helper.createSpriteFrame = function(params,cb)
             sf = new cc.SpriteFrame(params.texture)
         }
         cc.spriteFrameCache.addSpriteFrame(sf,params.name)
-        if(params.rect)
-        {
-            sf.setRect(params.rect)
-        }
         if(cb)
         {
             cb(sf)
@@ -456,4 +463,9 @@ helper.convertEndEvent = function()
         global.GHelper.log("call back ..." + params)
         params.endEvent(params)
     }
+}
+helper.seprarateIpAndPort = function(ipPort){        
+    var strs= new Array(); 
+    strs=ipPort.split(":"); 
+    return strs 
 }

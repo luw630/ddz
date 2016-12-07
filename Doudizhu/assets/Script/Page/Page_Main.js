@@ -50,8 +50,8 @@ cc.Class({
             global.GPageMgr.openPage("Page_UpdatePlayerInfo")
         }
         this.refreshBaseInfo()
-
-        cc.log("!!!!!!!! page_mail onLoad")
+        
+        //global.GServerFile.init()
         this._init()
     },
     onEnable:function()

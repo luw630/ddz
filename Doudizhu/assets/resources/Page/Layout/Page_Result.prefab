@@ -1670,7 +1670,7 @@
     "_tag": -1,
     "_opacityModifyRGB": false,
     "_id": "",
-    "_active": true,
+    "_active": false,
     "_components": [
       {
         "__id__": 56
@@ -1911,7 +1911,7 @@
     "_scaleY": 1,
     "_position": {
       "__type__": "cc.Vec2",
-      "x": 766,
+      "x": 667,
       "y": 147
     },
     "_skewX": 0,

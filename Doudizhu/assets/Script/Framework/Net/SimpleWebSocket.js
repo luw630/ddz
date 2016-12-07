@@ -97,6 +97,10 @@ global.SimpleWebSocket = cc.Class({
                 else
                 {
                     global.GNetDataModel.setState(this._host,this._port,global.ENetState.Closed)
+                    if(self.onClose)//解决chrome或者fififox的bug
+                    {
+                        self.onClose(e)
+                    }
                 }
             },1000)
             global.GNetDataModel.setState(this._host,this._port,global.ENetState.ReConnectting)
@@ -123,7 +127,15 @@ global.SimpleWebSocket = cc.Class({
         if (data && data.cmd)
         {
             var strData = JSON.stringify(data)
-            cc.log("receive:"+strData)
+            if(global.GGameDataModel.isLAN)
+            {
+                cc.info("receive:"+strData)
+            }
+            else
+            {
+                cc.log("receive:"+strData)
+            }
+            
             if ( (data.errcode===undefined || data.errcode == 0))
             {
                 if(this["receive_" + data.cmd])
@@ -132,7 +144,14 @@ global.SimpleWebSocket = cc.Class({
                 }
                 else
                 {
-                    cc.log(data.cmd + " has no handler!")
+                    if(GGameDataModel.isLAN)
+                    {
+                        cc.info(data.cmd + " has no handler!")
+                    }
+                    else
+                    {
+                        cc.log(data.cmd + " has no handler!")
+                    }
                 }
             }
             else
@@ -167,7 +186,14 @@ global.SimpleWebSocket = cc.Class({
         if (this._wb_client.readyState === 1)
         {
             var strData = JSON.stringify(data)
-            cc.log("send:"+strData)
+            if(global.GGameDataModel.isLAN)
+            {
+                cc.info("send:"+strData)
+            }
+            else
+            {
+                cc.log("send:"+strData)
+            }
             var msg = this._protoFilter.encode(data)
             this._wb_client.send(msg)
         }
@@ -179,7 +205,10 @@ global.SimpleWebSocket = cc.Class({
     close:function()
     {
         this._need_close = true
-        this._wb_client.close()
+        if (cc.isValid(this._wb_client))
+        {
+            this._wb_client.close()
+        }
     },
     /*
     //心跳包请求

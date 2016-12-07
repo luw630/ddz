@@ -10,28 +10,45 @@ cc.Class({
             default:null,
             type:cc.EditBox
         },
+        limit_click_panel:{
+            default:null,
+            type: cc.Node
+        }
     },
     
     // use this for initialization
     onLoad: function () {
         this._super()
+        this.setLimitClickPanelEnable(false)
+
         if(global.GNetPlatform)//虽然感觉不太可能，不过加上也不会又问题
         {
             return
         }
         var name = cc.sys.localStorage.getItem(global.localStorageKey.name)
         var pass = cc.sys.localStorage.getItem(global.localStorageKey.pass)
-        if(name && pass)
+        if(name && pass) 
         {
             //暂时为了方便调试关闭该功能
             if(cc.sys.isNative)
             {
-                //new global.NetPlatform()
-                //global.GNetPlatform.send_authuser(name, pass)
+                this.setLimitClickPanelEnable(true)
+                new global.NetPlatform()
+                global.GNetPlatform.send_authuser(name, pass)
             }   
         }
 
         global.GAudioTool.playMusic("Audio/main_music.mp3",true)
+
+        /*
+        var srtl = global.SimpleReverseTimerLabel.create(30, 10, 2)
+        srtl.node.x = srtl.node.x + 20
+        srtl.node.parent = this.node
+        srtl.run()*/
+    },
+    setLimitClickPanelEnable:function(flag)
+    {
+        this.limit_click_panel.active = flag
     },
     Btn_Login_OnClick:function(event)
     {

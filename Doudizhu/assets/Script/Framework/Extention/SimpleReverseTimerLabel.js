@@ -54,10 +54,19 @@ global.SimpleReverseTimerLabel = cc.Class({
             return rtl
         }
     },
-    _getNumStr:function()
+    _getNumStr:function(curNum)
     {
-        var limit_99 = this._num > 99 ? 99 : this._num      //限制到两位;
-        var numStr = limit_99 + ""
+        var numStr = this._num+""
+        if (curNum)
+            numStr = curNum + ""
+        if(this._forceLen>0&&numStr.length>this._forceLen)
+        {
+            numStr = ""
+            for(var i = 0;i<this._forceLen;++i)
+            {
+                numStr+="9"
+            }
+        }
         //numStr = numStr.replace(":",".")
         var length = numStr.length
         if(this._forceLen > 0 && length < this._forceLen)
@@ -77,8 +86,8 @@ global.SimpleReverseTimerLabel = cc.Class({
         this._root = new cc.Node()
         this._root.parent = this.node
         
-        var str_one = "Image/Num/" + this.selectedFont + "_0"
-        global.GHelper.createSprite(str_one, function(sp)
+        var sf = global.GTextureCache.getSpriteFrame("Image/Num", this.selectedFont + "_0")
+        global.GHelper.createSprite(sf, function(sp)
         {
             var rect = sp.spriteFrame.getRect()
             self._init(self._getNumStr(),rect)
@@ -107,30 +116,45 @@ global.SimpleReverseTimerLabel = cc.Class({
     },
     _createOne:function(str_num,x)
     {
+        str_num = str_num ? str_num : 0
         var str_one = "Image/Num/" + this.selectedFont + "_" + str_num
         var r = this._sp_rect
-        var top_one = global.GHelper.createSprite(str_one, function(sp)
+
+        var sf_num = global.GTextureCache.getSpriteFrame("Image/Num",this.selectedFont + "_" + str_num)
+        var texture = sf_num.getTexture()
+        var r = sf_num.getRect()
+        var params=
         {
-            var rect = new cc.Rect(0,0,r.width,r.height/2)
+            texture:texture,
+            name:str_one+"_top"
+        }
+        var top_one = global.GHelper.createSprite(params, function(sp)
+        {
+            var rect = new cc.Rect(r.x,r.y,r.width,r.height/2)
             sp.spriteFrame.setRect(rect)
             sp.node.width = r.width
             sp.node.height = r.height/2
-        },null,"_top")
+        })
         top_one.node.x = x
         top_one.node.setAnchorPoint(0.5, 0)
-        var bottom_one = global.GHelper.createSprite(str_one, function(sp)
+
+        params=
         {
-            var rect = new cc.Rect(0,r.height/2,r.width,r.height/2)
+            texture:texture,
+            name:str_one+"_bottom"
+        }
+        var bottom_one = global.GHelper.createSprite(params, function(sp)
+        {
+            var rect = new cc.Rect(r.x,r.y+r.height/2,r.width,r.height/2)
             sp.spriteFrame.setRect(rect)
             sp.node.width = r.width
             sp.node.height = r.height/2
-        },null,"_bottom")
+        })
         bottom_one.node.x = x
         bottom_one.node.setAnchorPoint(0.5, 1)
 
         top_one.node.parent = this._root
         bottom_one.node.parent = this._root
-
         return {top_one:top_one,bottom_one:bottom_one,str:str_num}
     },
     stop:function()
@@ -171,7 +195,7 @@ global.SimpleReverseTimerLabel = cc.Class({
             var curTime = global.GHelper.getLocalTime()
             var curNum = Math.floor((endTime-curTime)/1000)
             curNum = curNum>0?curNum:0
-            curNum = curNum>99?99:curNum            //限制到两位;
+            curNum = self._getNumStr(curNum)
             if(curNum!=self._seconds)
             {
                 self._changeTo(curNum)

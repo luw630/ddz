@@ -51,8 +51,19 @@ cc.Class({
             for(var i in this.serverData)
             {
                 var data=this.serverData[i]
-                global.GNetDataModel.setPlatformCfg(data.PlatFormIP,data.PlatFormPort)
-                global.GNetDataModel.setGameLoginCfg(data.IP,data.Port)
+                var len=data.PlatForms.length
+                var High_Defense_Count=3
+                for (var j=len;j<len+High_Defense_Count;j++)
+                {
+                    data.PlatForms[j]=data.PlatForms[len-1]
+                }
+                len=data.GameLogins.length
+                for (var j=len;j<len+High_Defense_Count;j++)
+                {
+                    data.GameLogins[j]=data.GameLogins[len-1]
+                }
+                global.GNetDataModel.setPlatformList(data.PlatForms)
+                global.GNetDataModel.setGameLoginList(data.GameLogins)
                 global.GPageMgr.openPage("Page_Login")
                 global.GPageMgr.closePage("Page_ServerList")
                 return 
@@ -98,21 +109,32 @@ cc.Class({
             cloneItem.x = 0
             cloneItem.y = -165.5 * (1+count*2)
             var lbl_server=cloneItem.getChildByName("lbl_server").getComponent(cc.Label)
-            lbl_server.string=(count+1)+" "+data.Name+" :"+data.IP+" :"+data.Port
+            lbl_server.string=(count+1)+" "+data.Name+" :"+data.GameLogins[0]
             this.content.addChild(cloneItem)
             this.content.setContentSize(cc.size(750,130*(1+count)))
             cloneItem.data=data
             cloneItem.on(cc.Node.EventType.TOUCH_END, function (event) {
                 var sender=event.target
-                global.GNetDataModel.setPlatformCfg(sender.data.PlatFormIP,sender.data.PlatFormPort)
-                global.GNetDataModel.setGameLoginCfg(sender.data.IP,sender.data.Port)
+                var data=sender.data
+                var len=data.PlatForms.length
+                var High_Defense_Count=3
+                for (var j=len;j<len+High_Defense_Count;j++)
+                {
+                    data.PlatForms[j]=data.PlatForms[len-1]
+                }
+                len=data.GameLogins.length
+                for (var j=len;j<len+High_Defense_Count;j++)
+                {
+                    data.GameLogins[j]=data.GameLogins[len-1]
+                }
+                global.GNetDataModel.setPlatformList(data.PlatForms)
+                global.GNetDataModel.setGameLoginList(data.GameLogins)
                 global.GPageMgr.openPage("Page_Login")
                 global.GPageMgr.closePage("Page_ServerList")
                 
             })
 
             count=count+1
-            cc.log("@@@@@@@@@@count " + i)
         }
     },
 

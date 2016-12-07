@@ -2,18 +2,19 @@ global.GGloryDataModel =
 {
     /*
     message PlayerGameRecordinfo {
-        optional int32 table_id = 1; //桌子id
-        optional int32 table_create_time = 2; //桌子创建时间
-        optional int32 tablecreater_rid = 3; //桌子创建者的rid
-        optional int32 entercosts = 4; // 报名费
-        repeated playerRecordinfo recordinfos = 5;
+        optional int32 id = 1;  //自增id
+        optional int32 table_id = 2; //桌子id
+        optional int32 table_create_time = 3; //桌子创建时间
+        optional int32 tablecreater_rid = 4; //桌子创建者的rid
+        optional int32 entercosts = 5; // 报名费
+        repeated playerRecordinfo recordinfos = 6;
     }
     //每个玩家在朋友桌存在期间的记录
     message playerRecordinfo {
         optional int32 rid = 1;
         optional int32 currencyid = 2; //货币id，金币为1
         optional int32 balancenum = 3; //输赢的数量，+为赢，-为输
-
+        optional string rolename = 4; // 玩家名字
     }*/
     _data:[],
     init:function(data)

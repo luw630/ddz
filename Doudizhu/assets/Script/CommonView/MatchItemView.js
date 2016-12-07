@@ -49,6 +49,10 @@ cc.Class({
     },
     Btn_Join_OnClicked:function(target)
     {
+        var gamestate = global.GGameDataModel.getGameState()
+        if (gamestate == global.EGameState.Table || gamestate == global.EGameState.Entering_Table)
+            return
+            
         cc.log("Btn_Join_OnClicked")
         var tgt = target.currentTarget
         var script = tgt.parent.getComponent("MatchItemView")

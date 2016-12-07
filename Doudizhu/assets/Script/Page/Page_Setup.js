@@ -95,7 +95,7 @@ cc.Class({
             var page = global.GPageMgr.getPage("Page_Table")
             if (page)
             {
-                global.GAudioTool.playMusic("Audio/table_music.mp3",true)
+                //global.GAudioTool.playMusic("Audio/table_music.mp3",true)
             }
             else
             {

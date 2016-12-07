@@ -16831,7 +16831,9 @@ proto.PlayerGameRecordinfoReq.prototype.toObject = function(opt_includeInstance)
 proto.PlayerGameRecordinfoReq.toObject = function(includeInstance, msg) {
   var f, obj = {
     version: (f = msg.getversion()) && proto.Version.toObject(includeInstance, f),
-    rid: jspb.Message.getField(msg, 2)
+    rid: jspb.Message.getField(msg, 2),
+    id: jspb.Message.getField(msg, 3),
+    limit: jspb.Message.getField(msg, 4)
   };
 
   if (includeInstance) {
@@ -16854,6 +16856,8 @@ proto.PlayerGameRecordinfoReq.fromObject = function(obj) {
   goog.isDef(obj.version) && jspb.Message.setWrapperField(
       msg, 1, proto.Version.fromObject(obj.version));
   goog.isDef(obj.rid) && jspb.Message.setField(msg, 2, obj.rid);
+  goog.isDef(obj.id) && jspb.Message.setField(msg, 3, obj.id);
+  goog.isDef(obj.limit) && jspb.Message.setField(msg, 4, obj.limit);
   return msg;
 };
 }
@@ -16891,6 +16895,14 @@ proto.PlayerGameRecordinfoReq.deserializeBinaryFromReader = function(msg, reader
     case 2:
       var value = /** @type {number} */ (reader.readInt32());
       msg.setrid(value);
+      break;
+    case 3:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setid(value);
+      break;
+    case 4:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setlimit(value);
       break;
     default:
       reader.skipField();
@@ -16942,6 +16954,20 @@ proto.PlayerGameRecordinfoReq.prototype.serializeBinaryToWriter = function (writ
   if (f != null) {
     writer.writeInt32(
       2,
+      f
+    );
+  }
+  f = jspb.Message.getField(this, 3);
+  if (f != null) {
+    writer.writeInt32(
+      3,
+      f
+    );
+  }
+  f = jspb.Message.getField(this, 4);
+  if (f != null) {
+    writer.writeInt32(
+      4,
       f
     );
   }
@@ -17013,6 +17039,64 @@ proto.PlayerGameRecordinfoReq.prototype.clearrid = function() {
  */
 proto.PlayerGameRecordinfoReq.prototype.hasrid = function() {
   return jspb.Message.getField(this, 2) != null;
+};
+
+
+/**
+ * optional int32 id = 3;
+ * @return {number}
+ */
+proto.PlayerGameRecordinfoReq.prototype.getid = function() {
+  return /** @type {number} */ (!this.hasid() ? 0 : jspb.Message.getField(this, 3));
+};
+
+
+/** @param {number?|undefined} value  */
+proto.PlayerGameRecordinfoReq.prototype.setid = function(value) {
+  jspb.Message.setField(this, 3, value);
+};
+
+
+proto.PlayerGameRecordinfoReq.prototype.clearid = function() {
+  jspb.Message.setField(this, 3, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return{!boolean}
+ */
+proto.PlayerGameRecordinfoReq.prototype.hasid = function() {
+  return jspb.Message.getField(this, 3) != null;
+};
+
+
+/**
+ * optional int32 limit = 4;
+ * @return {number}
+ */
+proto.PlayerGameRecordinfoReq.prototype.getlimit = function() {
+  return /** @type {number} */ (!this.haslimit() ? 0 : jspb.Message.getField(this, 4));
+};
+
+
+/** @param {number?|undefined} value  */
+proto.PlayerGameRecordinfoReq.prototype.setlimit = function(value) {
+  jspb.Message.setField(this, 4, value);
+};
+
+
+proto.PlayerGameRecordinfoReq.prototype.clearlimit = function() {
+  jspb.Message.setField(this, 4, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return{!boolean}
+ */
+proto.PlayerGameRecordinfoReq.prototype.haslimit = function() {
+  return jspb.Message.getField(this, 4) != null;
 };
 
 
@@ -17351,7 +17435,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<number>}
  * @const
  */
-proto.PlayerGameRecordinfo.repeatedFields_ = [5];
+proto.PlayerGameRecordinfo.repeatedFields_ = [6];
 
 
 
@@ -17381,10 +17465,11 @@ proto.PlayerGameRecordinfo.prototype.toObject = function(opt_includeInstance) {
  */
 proto.PlayerGameRecordinfo.toObject = function(includeInstance, msg) {
   var f, obj = {
-    table_id: jspb.Message.getField(msg, 1),
-    table_create_time: jspb.Message.getField(msg, 2),
-    tablecreater_rid: jspb.Message.getField(msg, 3),
-    entercosts: jspb.Message.getField(msg, 4),
+    id: jspb.Message.getField(msg, 1),
+    table_id: jspb.Message.getField(msg, 2),
+    table_create_time: jspb.Message.getField(msg, 3),
+    tablecreater_rid: jspb.Message.getField(msg, 4),
+    entercosts: jspb.Message.getField(msg, 5),
     recordinfos: jspb.Message.toObjectList(msg.getrecordinfos(),
     proto.playerRecordinfo.toObject, includeInstance)
   };
@@ -17406,12 +17491,13 @@ if (jspb.Message.GENERATE_FROM_OBJECT) {
  */
 proto.PlayerGameRecordinfo.fromObject = function(obj) {
   var f, msg = new proto.PlayerGameRecordinfo();
-  goog.isDef(obj.table_id) && jspb.Message.setField(msg, 1, obj.table_id);
-  goog.isDef(obj.table_create_time) && jspb.Message.setField(msg, 2, obj.table_create_time);
-  goog.isDef(obj.tablecreater_rid) && jspb.Message.setField(msg, 3, obj.tablecreater_rid);
-  goog.isDef(obj.entercosts) && jspb.Message.setField(msg, 4, obj.entercosts);
+  goog.isDef(obj.id) && jspb.Message.setField(msg, 1, obj.id);
+  goog.isDef(obj.table_id) && jspb.Message.setField(msg, 2, obj.table_id);
+  goog.isDef(obj.table_create_time) && jspb.Message.setField(msg, 3, obj.table_create_time);
+  goog.isDef(obj.tablecreater_rid) && jspb.Message.setField(msg, 4, obj.tablecreater_rid);
+  goog.isDef(obj.entercosts) && jspb.Message.setField(msg, 5, obj.entercosts);
   goog.isDef(obj.recordinfos) && jspb.Message.setRepeatedWrapperField(
-      msg, 5, goog.map(obj.recordinfos, function(i) {
+      msg, 6, goog.map(obj.recordinfos, function(i) {
         return proto.playerRecordinfo.fromObject(i);
       }));
   return msg;
@@ -17445,21 +17531,25 @@ proto.PlayerGameRecordinfo.deserializeBinaryFromReader = function(msg, reader) {
     switch (field) {
     case 1:
       var value = /** @type {number} */ (reader.readInt32());
-      msg.settable_id(value);
+      msg.setid(value);
       break;
     case 2:
       var value = /** @type {number} */ (reader.readInt32());
-      msg.settable_create_time(value);
+      msg.settable_id(value);
       break;
     case 3:
       var value = /** @type {number} */ (reader.readInt32());
-      msg.settablecreater_rid(value);
+      msg.settable_create_time(value);
       break;
     case 4:
       var value = /** @type {number} */ (reader.readInt32());
-      msg.setentercosts(value);
+      msg.settablecreater_rid(value);
       break;
     case 5:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.setentercosts(value);
+      break;
+    case 6:
       var value = new proto.playerRecordinfo;
       reader.readMessage(value,proto.playerRecordinfo.deserializeBinaryFromReader);
       msg.getrecordinfos().push(value);
@@ -17531,10 +17621,17 @@ proto.PlayerGameRecordinfo.prototype.serializeBinaryToWriter = function (writer)
       f
     );
   }
+  f = jspb.Message.getField(this, 5);
+  if (f != null) {
+    writer.writeInt32(
+      5,
+      f
+    );
+  }
   f = this.getrecordinfos();
   if (f.length > 0) {
     writer.writeRepeatedMessage(
-      5,
+      6,
       f,
       proto.playerRecordinfo.serializeBinaryToWriter
     );
@@ -17552,21 +17649,21 @@ proto.PlayerGameRecordinfo.prototype.cloneMessage = function() {
 
 
 /**
- * optional int32 table_id = 1;
+ * optional int32 id = 1;
  * @return {number}
  */
-proto.PlayerGameRecordinfo.prototype.gettable_id = function() {
-  return /** @type {number} */ (!this.hastable_id() ? 0 : jspb.Message.getField(this, 1));
+proto.PlayerGameRecordinfo.prototype.getid = function() {
+  return /** @type {number} */ (!this.hasid() ? 0 : jspb.Message.getField(this, 1));
 };
 
 
 /** @param {number?|undefined} value  */
-proto.PlayerGameRecordinfo.prototype.settable_id = function(value) {
+proto.PlayerGameRecordinfo.prototype.setid = function(value) {
   jspb.Message.setField(this, 1, value);
 };
 
 
-proto.PlayerGameRecordinfo.prototype.cleartable_id = function() {
+proto.PlayerGameRecordinfo.prototype.clearid = function() {
   jspb.Message.setField(this, 1, undefined);
 };
 
@@ -17575,27 +17672,27 @@ proto.PlayerGameRecordinfo.prototype.cleartable_id = function() {
  * Returns whether this field is set.
  * @return{!boolean}
  */
-proto.PlayerGameRecordinfo.prototype.hastable_id = function() {
+proto.PlayerGameRecordinfo.prototype.hasid = function() {
   return jspb.Message.getField(this, 1) != null;
 };
 
 
 /**
- * optional int32 table_create_time = 2;
+ * optional int32 table_id = 2;
  * @return {number}
  */
-proto.PlayerGameRecordinfo.prototype.gettable_create_time = function() {
-  return /** @type {number} */ (!this.hastable_create_time() ? 0 : jspb.Message.getField(this, 2));
+proto.PlayerGameRecordinfo.prototype.gettable_id = function() {
+  return /** @type {number} */ (!this.hastable_id() ? 0 : jspb.Message.getField(this, 2));
 };
 
 
 /** @param {number?|undefined} value  */
-proto.PlayerGameRecordinfo.prototype.settable_create_time = function(value) {
+proto.PlayerGameRecordinfo.prototype.settable_id = function(value) {
   jspb.Message.setField(this, 2, value);
 };
 
 
-proto.PlayerGameRecordinfo.prototype.cleartable_create_time = function() {
+proto.PlayerGameRecordinfo.prototype.cleartable_id = function() {
   jspb.Message.setField(this, 2, undefined);
 };
 
@@ -17604,27 +17701,27 @@ proto.PlayerGameRecordinfo.prototype.cleartable_create_time = function() {
  * Returns whether this field is set.
  * @return{!boolean}
  */
-proto.PlayerGameRecordinfo.prototype.hastable_create_time = function() {
+proto.PlayerGameRecordinfo.prototype.hastable_id = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
 
 /**
- * optional int32 tablecreater_rid = 3;
+ * optional int32 table_create_time = 3;
  * @return {number}
  */
-proto.PlayerGameRecordinfo.prototype.gettablecreater_rid = function() {
-  return /** @type {number} */ (!this.hastablecreater_rid() ? 0 : jspb.Message.getField(this, 3));
+proto.PlayerGameRecordinfo.prototype.gettable_create_time = function() {
+  return /** @type {number} */ (!this.hastable_create_time() ? 0 : jspb.Message.getField(this, 3));
 };
 
 
 /** @param {number?|undefined} value  */
-proto.PlayerGameRecordinfo.prototype.settablecreater_rid = function(value) {
+proto.PlayerGameRecordinfo.prototype.settable_create_time = function(value) {
   jspb.Message.setField(this, 3, value);
 };
 
 
-proto.PlayerGameRecordinfo.prototype.cleartablecreater_rid = function() {
+proto.PlayerGameRecordinfo.prototype.cleartable_create_time = function() {
   jspb.Message.setField(this, 3, undefined);
 };
 
@@ -17633,27 +17730,27 @@ proto.PlayerGameRecordinfo.prototype.cleartablecreater_rid = function() {
  * Returns whether this field is set.
  * @return{!boolean}
  */
-proto.PlayerGameRecordinfo.prototype.hastablecreater_rid = function() {
+proto.PlayerGameRecordinfo.prototype.hastable_create_time = function() {
   return jspb.Message.getField(this, 3) != null;
 };
 
 
 /**
- * optional int32 entercosts = 4;
+ * optional int32 tablecreater_rid = 4;
  * @return {number}
  */
-proto.PlayerGameRecordinfo.prototype.getentercosts = function() {
-  return /** @type {number} */ (!this.hasentercosts() ? 0 : jspb.Message.getField(this, 4));
+proto.PlayerGameRecordinfo.prototype.gettablecreater_rid = function() {
+  return /** @type {number} */ (!this.hastablecreater_rid() ? 0 : jspb.Message.getField(this, 4));
 };
 
 
 /** @param {number?|undefined} value  */
-proto.PlayerGameRecordinfo.prototype.setentercosts = function(value) {
+proto.PlayerGameRecordinfo.prototype.settablecreater_rid = function(value) {
   jspb.Message.setField(this, 4, value);
 };
 
 
-proto.PlayerGameRecordinfo.prototype.clearentercosts = function() {
+proto.PlayerGameRecordinfo.prototype.cleartablecreater_rid = function() {
   jspb.Message.setField(this, 4, undefined);
 };
 
@@ -17662,26 +17759,55 @@ proto.PlayerGameRecordinfo.prototype.clearentercosts = function() {
  * Returns whether this field is set.
  * @return{!boolean}
  */
-proto.PlayerGameRecordinfo.prototype.hasentercosts = function() {
+proto.PlayerGameRecordinfo.prototype.hastablecreater_rid = function() {
   return jspb.Message.getField(this, 4) != null;
 };
 
 
 /**
- * repeated playerRecordinfo recordinfos = 5;
+ * optional int32 entercosts = 5;
+ * @return {number}
+ */
+proto.PlayerGameRecordinfo.prototype.getentercosts = function() {
+  return /** @type {number} */ (!this.hasentercosts() ? 0 : jspb.Message.getField(this, 5));
+};
+
+
+/** @param {number?|undefined} value  */
+proto.PlayerGameRecordinfo.prototype.setentercosts = function(value) {
+  jspb.Message.setField(this, 5, value);
+};
+
+
+proto.PlayerGameRecordinfo.prototype.clearentercosts = function() {
+  jspb.Message.setField(this, 5, undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return{!boolean}
+ */
+proto.PlayerGameRecordinfo.prototype.hasentercosts = function() {
+  return jspb.Message.getField(this, 5) != null;
+};
+
+
+/**
+ * repeated playerRecordinfo recordinfos = 6;
  * If you change this array by adding, removing or replacing elements, or if you
  * replace the array itself, then you must call the setter to update it.
  * @return {!Array.<!proto.playerRecordinfo>}
  */
 proto.PlayerGameRecordinfo.prototype.getrecordinfos = function() {
   return /** @type{!Array.<!proto.playerRecordinfo>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.playerRecordinfo, 5));
+    jspb.Message.getRepeatedWrapperField(this, proto.playerRecordinfo, 6));
 };
 
 
 /** @param {Array.<!proto.playerRecordinfo>} value  */
 proto.PlayerGameRecordinfo.prototype.setrecordinfos = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 5, value);
+  jspb.Message.setRepeatedWrapperField(this, 6, value);
 };
 
 
@@ -21457,246 +21583,6 @@ proto.ConfBase.prototype.hasconfcontent = function() {
  * @extends {jspb.Message}
  * @constructor
  */
-proto.DownloadCfgRes = function(opt_data) {
-  jspb.Message.initialize(this, opt_data, 0, -1, proto.DownloadCfgRes.repeatedFields_, null);
-};
-goog.inherits(proto.DownloadCfgRes, jspb.Message);
-if (goog.DEBUG && !COMPILED) {
-  proto.DownloadCfgRes.displayName = 'proto.DownloadCfgRes';
-}
-/**
- * List of repeated fields within this message type.
- * @private {!Array<number>}
- * @const
- */
-proto.DownloadCfgRes.repeatedFields_ = [2];
-
-
-
-if (jspb.Message.GENERATE_TO_OBJECT) {
-/**
- * Creates an object representation of this proto suitable for use in Soy templates.
- * Field names that are reserved in JavaScript and will be renamed to pb_name.
- * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
- * For the list of reserved names please see:
- *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
- * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
- *     for transitional soy proto support: http://goto/soy-param-migration
- * @return {!Object}
- */
-proto.DownloadCfgRes.prototype.toObject = function(opt_includeInstance) {
-  return proto.DownloadCfgRes.toObject(opt_includeInstance, this);
-};
-
-
-/**
- * Static version of the {@see toObject} method.
- * @param {boolean|undefined} includeInstance Whether to include the JSPB
- *     instance for transitional soy proto support:
- *     http://goto/soy-param-migration
- * @param {!proto.DownloadCfgRes} msg The msg instance to transform.
- * @return {!Object}
- */
-proto.DownloadCfgRes.toObject = function(includeInstance, msg) {
-  var f, obj = {
-    version: (f = msg.getversion()) && proto.Version.toObject(includeInstance, f),
-    resconfinfos: jspb.Message.toObjectList(msg.getresconfinfos(),
-    proto.ConfBase.toObject, includeInstance)
-  };
-
-  if (includeInstance) {
-    obj.$jspbMessageInstance = msg;
-  }
-  return obj;
-};
-}
-
-
-if (jspb.Message.GENERATE_FROM_OBJECT) {
-/**
- * Loads data from an object into a new instance of this proto.
- * @param {!Object} obj The object representation of this proto to
- *     load the data from.
- * @return {!proto.DownloadCfgRes}
- */
-proto.DownloadCfgRes.fromObject = function(obj) {
-  var f, msg = new proto.DownloadCfgRes();
-  goog.isDef(obj.version) && jspb.Message.setWrapperField(
-      msg, 1, proto.Version.fromObject(obj.version));
-  goog.isDef(obj.resconfinfos) && jspb.Message.setRepeatedWrapperField(
-      msg, 2, goog.map(obj.resconfinfos, function(i) {
-        return proto.ConfBase.fromObject(i);
-      }));
-  return msg;
-};
-}
-/**
- * Deserializes binary data (in protobuf wire format).
- * @param {jspb.ByteSource} bytes The bytes to deserialize.
- * @return {!proto.DownloadCfgRes}
- */
-proto.DownloadCfgRes.deserializeBinary = function(bytes) {
-  var reader = new jspb.BinaryReader(bytes);
-  var msg = new proto.DownloadCfgRes;
-  return proto.DownloadCfgRes.deserializeBinaryFromReader(msg, reader);
-};
-
-
-/**
- * Deserializes binary data (in protobuf wire format) from the
- * given reader into the given message object.
- * @param {!proto.DownloadCfgRes} msg The message object to deserialize into.
- * @param {!jspb.BinaryReader} reader The BinaryReader to use.
- * @return {!proto.DownloadCfgRes}
- */
-proto.DownloadCfgRes.deserializeBinaryFromReader = function(msg, reader) {
-  while (reader.nextField()) {
-    if (reader.isEndGroup()) {
-      break;
-    }
-    var field = reader.getFieldNumber();
-    switch (field) {
-    case 1:
-      var value = new proto.Version;
-      reader.readMessage(value,proto.Version.deserializeBinaryFromReader);
-      msg.setversion(value);
-      break;
-    case 2:
-      var value = new proto.ConfBase;
-      reader.readMessage(value,proto.ConfBase.deserializeBinaryFromReader);
-      msg.getresconfinfos().push(value);
-      msg.setresconfinfos(msg.getresconfinfos());
-      break;
-    default:
-      reader.skipField();
-      break;
-    }
-  }
-  return msg;
-};
-
-
-/**
- * Class method variant: serializes the given message to binary data
- * (in protobuf wire format), writing to the given BinaryWriter.
- * @param {!proto.DownloadCfgRes} message
- * @param {!jspb.BinaryWriter} writer
- */
-proto.DownloadCfgRes.serializeBinaryToWriter = function(message, writer) {
-  message.serializeBinaryToWriter(writer);
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format).
- * @return {!Uint8Array}
- */
-proto.DownloadCfgRes.prototype.serializeBinary = function() {
-  var writer = new jspb.BinaryWriter();
-  this.serializeBinaryToWriter(writer);
-  return writer.getResultBuffer();
-};
-
-
-/**
- * Serializes the message to binary data (in protobuf wire format),
- * writing to the given BinaryWriter.
- * @param {!jspb.BinaryWriter} writer
- */
-proto.DownloadCfgRes.prototype.serializeBinaryToWriter = function (writer) {
-  var f = undefined;
-  f = this.getversion();
-  if (f != null) {
-    writer.writeMessage(
-      1,
-      f,
-      proto.Version.serializeBinaryToWriter
-    );
-  }
-  f = this.getresconfinfos();
-  if (f.length > 0) {
-    writer.writeRepeatedMessage(
-      2,
-      f,
-      proto.ConfBase.serializeBinaryToWriter
-    );
-  }
-};
-
-
-/**
- * Creates a deep clone of this proto. No data is shared with the original.
- * @return {!proto.DownloadCfgRes} The clone.
- */
-proto.DownloadCfgRes.prototype.cloneMessage = function() {
-  return /** @type {!proto.DownloadCfgRes} */ (jspb.Message.cloneMessage(this));
-};
-
-
-/**
- * optional Version version = 1;
- * @return {proto.Version}
- */
-proto.DownloadCfgRes.prototype.getversion = function() {
-  return /** @type{proto.Version} */ (
-    jspb.Message.getWrapperField(this, proto.Version, 1));
-};
-
-
-/** @param {proto.Version|undefined} value  */
-proto.DownloadCfgRes.prototype.setversion = function(value) {
-  jspb.Message.setWrapperField(this, 1, value);
-};
-
-
-proto.DownloadCfgRes.prototype.clearversion = function() {
-  this.setversion(undefined);
-};
-
-
-/**
- * Returns whether this field is set.
- * @return{!boolean}
- */
-proto.DownloadCfgRes.prototype.hasversion = function() {
-  return jspb.Message.getField(this, 1) != null;
-};
-
-
-/**
- * repeated ConfBase resconfinfos = 2;
- * If you change this array by adding, removing or replacing elements, or if you
- * replace the array itself, then you must call the setter to update it.
- * @return {!Array.<!proto.ConfBase>}
- */
-proto.DownloadCfgRes.prototype.getresconfinfos = function() {
-  return /** @type{!Array.<!proto.ConfBase>} */ (
-    jspb.Message.getRepeatedWrapperField(this, proto.ConfBase, 2));
-};
-
-
-/** @param {Array.<!proto.ConfBase>} value  */
-proto.DownloadCfgRes.prototype.setresconfinfos = function(value) {
-  jspb.Message.setRepeatedWrapperField(this, 2, value);
-};
-
-
-proto.DownloadCfgRes.prototype.clearresconfinfos = function() {
-  this.setresconfinfos([]);
-};
-
-
-
-/**
- * Generated by JsPbCodeGenerator.
- * @param {Array=} opt_data Optional initial data array, typically from a
- * server response, or constructed directly in Javascript. The array is used
- * in place and becomes part of the constructed object. It is not cloned.
- * If no data is provided, the constructed object will be empty, but still
- * valid.
- * @extends {jspb.Message}
- * @constructor
- */
 proto.DownloadCfgReq = function(opt_data) {
   jspb.Message.initialize(this, opt_data, 0, -1, proto.DownloadCfgReq.repeatedFields_, null);
 };
@@ -21709,7 +21595,7 @@ if (goog.DEBUG && !COMPILED) {
  * @private {!Array<number>}
  * @const
  */
-proto.DownloadCfgReq.repeatedFields_ = [3];
+proto.DownloadCfgReq.repeatedFields_ = [2];
 
 
 
@@ -21739,9 +21625,8 @@ proto.DownloadCfgReq.prototype.toObject = function(opt_includeInstance) {
  */
 proto.DownloadCfgReq.toObject = function(includeInstance, msg) {
   var f, obj = {
-    errcode: jspb.Message.getField(msg, 1),
-    errcodedes: jspb.Message.getField(msg, 2),
-    reqconfinfos: jspb.Message.toObjectList(msg.getreqconfinfos(),
+    version: (f = msg.getversion()) && proto.Version.toObject(includeInstance, f),
+    resconfinfos: jspb.Message.toObjectList(msg.getresconfinfos(),
     proto.ConfBase.toObject, includeInstance)
   };
 
@@ -21762,10 +21647,10 @@ if (jspb.Message.GENERATE_FROM_OBJECT) {
  */
 proto.DownloadCfgReq.fromObject = function(obj) {
   var f, msg = new proto.DownloadCfgReq();
-  goog.isDef(obj.errcode) && jspb.Message.setField(msg, 1, obj.errcode);
-  goog.isDef(obj.errcodedes) && jspb.Message.setField(msg, 2, obj.errcodedes);
-  goog.isDef(obj.reqconfinfos) && jspb.Message.setRepeatedWrapperField(
-      msg, 3, goog.map(obj.reqconfinfos, function(i) {
+  goog.isDef(obj.version) && jspb.Message.setWrapperField(
+      msg, 1, proto.Version.fromObject(obj.version));
+  goog.isDef(obj.resconfinfos) && jspb.Message.setRepeatedWrapperField(
+      msg, 2, goog.map(obj.resconfinfos, function(i) {
         return proto.ConfBase.fromObject(i);
       }));
   return msg;
@@ -21798,18 +21683,15 @@ proto.DownloadCfgReq.deserializeBinaryFromReader = function(msg, reader) {
     var field = reader.getFieldNumber();
     switch (field) {
     case 1:
-      var value = /** @type {number} */ (reader.readInt32());
-      msg.seterrcode(value);
+      var value = new proto.Version;
+      reader.readMessage(value,proto.Version.deserializeBinaryFromReader);
+      msg.setversion(value);
       break;
     case 2:
-      var value = /** @type {string} */ (reader.readString());
-      msg.seterrcodedes(value);
-      break;
-    case 3:
       var value = new proto.ConfBase;
       reader.readMessage(value,proto.ConfBase.deserializeBinaryFromReader);
-      msg.getreqconfinfos().push(value);
-      msg.setreqconfinfos(msg.getreqconfinfos());
+      msg.getresconfinfos().push(value);
+      msg.setresconfinfos(msg.getresconfinfos());
       break;
     default:
       reader.skipField();
@@ -21849,6 +21731,250 @@ proto.DownloadCfgReq.prototype.serializeBinary = function() {
  */
 proto.DownloadCfgReq.prototype.serializeBinaryToWriter = function (writer) {
   var f = undefined;
+  f = this.getversion();
+  if (f != null) {
+    writer.writeMessage(
+      1,
+      f,
+      proto.Version.serializeBinaryToWriter
+    );
+  }
+  f = this.getresconfinfos();
+  if (f.length > 0) {
+    writer.writeRepeatedMessage(
+      2,
+      f,
+      proto.ConfBase.serializeBinaryToWriter
+    );
+  }
+};
+
+
+/**
+ * Creates a deep clone of this proto. No data is shared with the original.
+ * @return {!proto.DownloadCfgReq} The clone.
+ */
+proto.DownloadCfgReq.prototype.cloneMessage = function() {
+  return /** @type {!proto.DownloadCfgReq} */ (jspb.Message.cloneMessage(this));
+};
+
+
+/**
+ * optional Version version = 1;
+ * @return {proto.Version}
+ */
+proto.DownloadCfgReq.prototype.getversion = function() {
+  return /** @type{proto.Version} */ (
+    jspb.Message.getWrapperField(this, proto.Version, 1));
+};
+
+
+/** @param {proto.Version|undefined} value  */
+proto.DownloadCfgReq.prototype.setversion = function(value) {
+  jspb.Message.setWrapperField(this, 1, value);
+};
+
+
+proto.DownloadCfgReq.prototype.clearversion = function() {
+  this.setversion(undefined);
+};
+
+
+/**
+ * Returns whether this field is set.
+ * @return{!boolean}
+ */
+proto.DownloadCfgReq.prototype.hasversion = function() {
+  return jspb.Message.getField(this, 1) != null;
+};
+
+
+/**
+ * repeated ConfBase resconfinfos = 2;
+ * If you change this array by adding, removing or replacing elements, or if you
+ * replace the array itself, then you must call the setter to update it.
+ * @return {!Array.<!proto.ConfBase>}
+ */
+proto.DownloadCfgReq.prototype.getresconfinfos = function() {
+  return /** @type{!Array.<!proto.ConfBase>} */ (
+    jspb.Message.getRepeatedWrapperField(this, proto.ConfBase, 2));
+};
+
+
+/** @param {Array.<!proto.ConfBase>} value  */
+proto.DownloadCfgReq.prototype.setresconfinfos = function(value) {
+  jspb.Message.setRepeatedWrapperField(this, 2, value);
+};
+
+
+proto.DownloadCfgReq.prototype.clearresconfinfos = function() {
+  this.setresconfinfos([]);
+};
+
+
+
+/**
+ * Generated by JsPbCodeGenerator.
+ * @param {Array=} opt_data Optional initial data array, typically from a
+ * server response, or constructed directly in Javascript. The array is used
+ * in place and becomes part of the constructed object. It is not cloned.
+ * If no data is provided, the constructed object will be empty, but still
+ * valid.
+ * @extends {jspb.Message}
+ * @constructor
+ */
+proto.DownloadCfgRes = function(opt_data) {
+  jspb.Message.initialize(this, opt_data, 0, -1, proto.DownloadCfgRes.repeatedFields_, null);
+};
+goog.inherits(proto.DownloadCfgRes, jspb.Message);
+if (goog.DEBUG && !COMPILED) {
+  proto.DownloadCfgRes.displayName = 'proto.DownloadCfgRes';
+}
+/**
+ * List of repeated fields within this message type.
+ * @private {!Array<number>}
+ * @const
+ */
+proto.DownloadCfgRes.repeatedFields_ = [3];
+
+
+
+if (jspb.Message.GENERATE_TO_OBJECT) {
+/**
+ * Creates an object representation of this proto suitable for use in Soy templates.
+ * Field names that are reserved in JavaScript and will be renamed to pb_name.
+ * To access a reserved field use, foo.pb_<name>, eg, foo.pb_default.
+ * For the list of reserved names please see:
+ *     com.google.apps.jspb.JsClassTemplate.JS_RESERVED_WORDS.
+ * @param {boolean=} opt_includeInstance Whether to include the JSPB instance
+ *     for transitional soy proto support: http://goto/soy-param-migration
+ * @return {!Object}
+ */
+proto.DownloadCfgRes.prototype.toObject = function(opt_includeInstance) {
+  return proto.DownloadCfgRes.toObject(opt_includeInstance, this);
+};
+
+
+/**
+ * Static version of the {@see toObject} method.
+ * @param {boolean|undefined} includeInstance Whether to include the JSPB
+ *     instance for transitional soy proto support:
+ *     http://goto/soy-param-migration
+ * @param {!proto.DownloadCfgRes} msg The msg instance to transform.
+ * @return {!Object}
+ */
+proto.DownloadCfgRes.toObject = function(includeInstance, msg) {
+  var f, obj = {
+    errcode: jspb.Message.getField(msg, 1),
+    errcodedes: jspb.Message.getField(msg, 2),
+    reqconfinfos: jspb.Message.toObjectList(msg.getreqconfinfos(),
+    proto.ConfBase.toObject, includeInstance)
+  };
+
+  if (includeInstance) {
+    obj.$jspbMessageInstance = msg;
+  }
+  return obj;
+};
+}
+
+
+if (jspb.Message.GENERATE_FROM_OBJECT) {
+/**
+ * Loads data from an object into a new instance of this proto.
+ * @param {!Object} obj The object representation of this proto to
+ *     load the data from.
+ * @return {!proto.DownloadCfgRes}
+ */
+proto.DownloadCfgRes.fromObject = function(obj) {
+  var f, msg = new proto.DownloadCfgRes();
+  goog.isDef(obj.errcode) && jspb.Message.setField(msg, 1, obj.errcode);
+  goog.isDef(obj.errcodedes) && jspb.Message.setField(msg, 2, obj.errcodedes);
+  goog.isDef(obj.reqconfinfos) && jspb.Message.setRepeatedWrapperField(
+      msg, 3, goog.map(obj.reqconfinfos, function(i) {
+        return proto.ConfBase.fromObject(i);
+      }));
+  return msg;
+};
+}
+/**
+ * Deserializes binary data (in protobuf wire format).
+ * @param {jspb.ByteSource} bytes The bytes to deserialize.
+ * @return {!proto.DownloadCfgRes}
+ */
+proto.DownloadCfgRes.deserializeBinary = function(bytes) {
+  var reader = new jspb.BinaryReader(bytes);
+  var msg = new proto.DownloadCfgRes;
+  return proto.DownloadCfgRes.deserializeBinaryFromReader(msg, reader);
+};
+
+
+/**
+ * Deserializes binary data (in protobuf wire format) from the
+ * given reader into the given message object.
+ * @param {!proto.DownloadCfgRes} msg The message object to deserialize into.
+ * @param {!jspb.BinaryReader} reader The BinaryReader to use.
+ * @return {!proto.DownloadCfgRes}
+ */
+proto.DownloadCfgRes.deserializeBinaryFromReader = function(msg, reader) {
+  while (reader.nextField()) {
+    if (reader.isEndGroup()) {
+      break;
+    }
+    var field = reader.getFieldNumber();
+    switch (field) {
+    case 1:
+      var value = /** @type {number} */ (reader.readInt32());
+      msg.seterrcode(value);
+      break;
+    case 2:
+      var value = /** @type {string} */ (reader.readString());
+      msg.seterrcodedes(value);
+      break;
+    case 3:
+      var value = new proto.ConfBase;
+      reader.readMessage(value,proto.ConfBase.deserializeBinaryFromReader);
+      msg.getreqconfinfos().push(value);
+      msg.setreqconfinfos(msg.getreqconfinfos());
+      break;
+    default:
+      reader.skipField();
+      break;
+    }
+  }
+  return msg;
+};
+
+
+/**
+ * Class method variant: serializes the given message to binary data
+ * (in protobuf wire format), writing to the given BinaryWriter.
+ * @param {!proto.DownloadCfgRes} message
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.DownloadCfgRes.serializeBinaryToWriter = function(message, writer) {
+  message.serializeBinaryToWriter(writer);
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format).
+ * @return {!Uint8Array}
+ */
+proto.DownloadCfgRes.prototype.serializeBinary = function() {
+  var writer = new jspb.BinaryWriter();
+  this.serializeBinaryToWriter(writer);
+  return writer.getResultBuffer();
+};
+
+
+/**
+ * Serializes the message to binary data (in protobuf wire format),
+ * writing to the given BinaryWriter.
+ * @param {!jspb.BinaryWriter} writer
+ */
+proto.DownloadCfgRes.prototype.serializeBinaryToWriter = function (writer) {
+  var f = undefined;
   f = jspb.Message.getField(this, 1);
   if (f != null) {
     writer.writeInt32(
@@ -21876,10 +22002,10 @@ proto.DownloadCfgReq.prototype.serializeBinaryToWriter = function (writer) {
 
 /**
  * Creates a deep clone of this proto. No data is shared with the original.
- * @return {!proto.DownloadCfgReq} The clone.
+ * @return {!proto.DownloadCfgRes} The clone.
  */
-proto.DownloadCfgReq.prototype.cloneMessage = function() {
-  return /** @type {!proto.DownloadCfgReq} */ (jspb.Message.cloneMessage(this));
+proto.DownloadCfgRes.prototype.cloneMessage = function() {
+  return /** @type {!proto.DownloadCfgRes} */ (jspb.Message.cloneMessage(this));
 };
 
 
@@ -21887,18 +22013,18 @@ proto.DownloadCfgReq.prototype.cloneMessage = function() {
  * optional int32 errcode = 1;
  * @return {number}
  */
-proto.DownloadCfgReq.prototype.geterrcode = function() {
+proto.DownloadCfgRes.prototype.geterrcode = function() {
   return /** @type {number} */ (!this.haserrcode() ? 0 : jspb.Message.getField(this, 1));
 };
 
 
 /** @param {number?|undefined} value  */
-proto.DownloadCfgReq.prototype.seterrcode = function(value) {
+proto.DownloadCfgRes.prototype.seterrcode = function(value) {
   jspb.Message.setField(this, 1, value);
 };
 
 
-proto.DownloadCfgReq.prototype.clearerrcode = function() {
+proto.DownloadCfgRes.prototype.clearerrcode = function() {
   jspb.Message.setField(this, 1, undefined);
 };
 
@@ -21907,7 +22033,7 @@ proto.DownloadCfgReq.prototype.clearerrcode = function() {
  * Returns whether this field is set.
  * @return{!boolean}
  */
-proto.DownloadCfgReq.prototype.haserrcode = function() {
+proto.DownloadCfgRes.prototype.haserrcode = function() {
   return jspb.Message.getField(this, 1) != null;
 };
 
@@ -21916,18 +22042,18 @@ proto.DownloadCfgReq.prototype.haserrcode = function() {
  * optional string errcodedes = 2;
  * @return {string}
  */
-proto.DownloadCfgReq.prototype.geterrcodedes = function() {
+proto.DownloadCfgRes.prototype.geterrcodedes = function() {
   return /** @type {string} */ (!this.haserrcodedes() ? "" : jspb.Message.getField(this, 2));
 };
 
 
 /** @param {string?|undefined} value  */
-proto.DownloadCfgReq.prototype.seterrcodedes = function(value) {
+proto.DownloadCfgRes.prototype.seterrcodedes = function(value) {
   jspb.Message.setField(this, 2, value);
 };
 
 
-proto.DownloadCfgReq.prototype.clearerrcodedes = function() {
+proto.DownloadCfgRes.prototype.clearerrcodedes = function() {
   jspb.Message.setField(this, 2, undefined);
 };
 
@@ -21936,7 +22062,7 @@ proto.DownloadCfgReq.prototype.clearerrcodedes = function() {
  * Returns whether this field is set.
  * @return{!boolean}
  */
-proto.DownloadCfgReq.prototype.haserrcodedes = function() {
+proto.DownloadCfgRes.prototype.haserrcodedes = function() {
   return jspb.Message.getField(this, 2) != null;
 };
 
@@ -21947,19 +22073,19 @@ proto.DownloadCfgReq.prototype.haserrcodedes = function() {
  * replace the array itself, then you must call the setter to update it.
  * @return {!Array.<!proto.ConfBase>}
  */
-proto.DownloadCfgReq.prototype.getreqconfinfos = function() {
+proto.DownloadCfgRes.prototype.getreqconfinfos = function() {
   return /** @type{!Array.<!proto.ConfBase>} */ (
     jspb.Message.getRepeatedWrapperField(this, proto.ConfBase, 3));
 };
 
 
 /** @param {Array.<!proto.ConfBase>} value  */
-proto.DownloadCfgReq.prototype.setreqconfinfos = function(value) {
+proto.DownloadCfgRes.prototype.setreqconfinfos = function(value) {
   jspb.Message.setRepeatedWrapperField(this, 3, value);
 };
 
 
-proto.DownloadCfgReq.prototype.clearreqconfinfos = function() {
+proto.DownloadCfgRes.prototype.clearreqconfinfos = function() {
   this.setreqconfinfos([]);
 };
 

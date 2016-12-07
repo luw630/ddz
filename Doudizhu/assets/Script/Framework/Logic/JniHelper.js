@@ -15,7 +15,7 @@ jniHelper.loginByWeiXin =function(refreshToken)
 {
     if(cc.sys.os == cc.sys.OS_ANDROID){
         var funName=jniHelper.setCallBack(jniHelper.closeWeiXinLogin)
-        jsj.callStaticMethod("com/juzhong/go/wxapi/WXEntryActivity", "loginByWeiXin","(Ljava/lang/String;Ljava/lang/String;)V" , refreshToken,funName)
+        jsj.callStaticMethod("com/juzhong/doudizhu/wxapi/WXEntryActivity", "loginByWeiXin","(Ljava/lang/String;Ljava/lang/String;)V" , refreshToken,funName)
     }else if(cc.sys.os == cc.sys.OS_IOS){
         var funName=jniHelper.setCallBack(jniHelper.closeWeiXinLogin)
         jsj.callStaticMethod("WeiXinLogin", "registerScriptHandler",funName)
@@ -195,20 +195,20 @@ jniHelper.beginVoiceRecord = function(){
         jsj.callStaticMethod("VoiceRecord", "beginRecord" )
     }
     else if(cc.sys.os == cc.sys.OS_WINDOWS){
-        var instance = VoiceRecord.getInstance()
-        if(instance){
-            var path = this.getRecordPath() + "temp.wav"
-            if (jsb.fileUtils.isFileExist(absolutPath)){
-                os.remove(path)
-            }
-            global.GHelper.make_dir(path)
-            var isOK = instance.beginRecord(path)
-            this._isRecording = true
-            if (!isOK){
-                global.GHelper.showTip("No_Recorder")
-                self._isRecording = false
-            }
-        }
+        // var instance = VoiceRecord.getInstance()
+        // if(instance){
+        //     var path = this.getRecordPath() + "temp.wav"
+        //     if (jsb.fileUtils.isFileExist(absolutPath)){
+        //         os.remove(path)
+        //     }
+        //     global.GHelper.make_dir(path)
+        //     var isOK = instance.beginRecord(path)
+        //     this._isRecording = true
+        //     if (!isOK){
+        //         global.GHelper.showTip("No_Recorder")
+        //         self._isRecording = false
+        //     }
+        // }
     }
 }
 
@@ -301,7 +301,7 @@ jniHelper.voiceRecordEnd = function(params){
         t.input = path
         t.output = targetPath
         var endEvent = function(){
-            global.GQiNiuManager.file_type = global.QiNiuUploadType.voices
+            global.GQiNiuManager.file_type = global.EQiNiuUploadType.voices
             global.GQiNiuManager.file_key = fileName
             global.GQiNiuManager.file_path = targetPath
             global.GQiNiuManager.endCallBack = global.GJniHelper.endUploadVoiceToServer

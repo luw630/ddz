@@ -75,12 +75,16 @@ global.ReverseTimerLabel = cc.Class({
         var self = this
         this._root = new cc.Node()
         this._root.parent = this.node
-        var str_one = "Image/Num/" + this.selectedFont + "_0"
-        global.GHelper.createSprite(str_one, function(sp)
+        //var str_one = "Image/Num/" + this.selectedFont + "_0"
+        var sf = global.GTextureCache.getNumSpriteFrame(0, this.selectedFont)
+        if(sf)
         {
-            var rect = sp.spriteFrame.getRect()
-            self._init(self._getNumStr(),rect)
-        })
+            global.GHelper.createSprite(sf, function(sp)
+            {
+                var rect = sp.spriteFrame.getRect()
+                self._init(self._getNumStr(),rect)
+            })
+        }
     },
     _init:function(numStr,r)
     {
@@ -105,31 +109,36 @@ global.ReverseTimerLabel = cc.Class({
     },
     _createOne:function(str_one,x)
     {
-        var one_path = "Image/Num/" + this.selectedFont + "_" + str_one
+        //var one_path = "Image/Num/" + this.selectedFont + "_" + str_one
         var r = this._sp_rect
-        var top_one = global.GHelper.createSprite(one_path, function(sp)
+        var sf = global.GTextureCache.getNumSpriteFrame(str_one, this.selectedFont)
+        if(sf)
         {
-            var rect = new cc.Rect(0,0,r.width,r.height/2)
-            sp.spriteFrame.setRect(rect)
-            sp.node.width = r.width
-            sp.node.height = r.height/2
-        },null,"_top")
-        top_one.node.x = x
-        top_one.node.setAnchorPoint(0.5, 0)
-        var bottom_one = global.GHelper.createSprite(one_path, function(sp)
-        {
-            var rect = new cc.Rect(0,r.height/2,r.width,r.height/2)
-            sp.spriteFrame.setRect(rect)
-            sp.node.width = r.width
-            sp.node.height = r.height/2
-        },null,"_bottom")
-        bottom_one.node.x = x
-        bottom_one.node.setAnchorPoint(0.5, 1)
+            var top_one = global.GHelper.createSprite(sf, function(sp)
+            {
+                var rect = new cc.Rect(0,0,r.width,r.height/2)
+                sp.spriteFrame.setRect(rect)
+                sp.node.width = r.width
+                sp.node.height = r.height/2
+            },null,"_top")
+            top_one.node.x = x
+            top_one.node.setAnchorPoint(0.5, 0)
 
-        top_one.node.parent = this._root
-        bottom_one.node.parent = this._root
+            var bottom_one = global.GHelper.createSprite(sf, function(sp)
+            {
+                var rect = new cc.Rect(0,r.height/2,r.width,r.height/2)
+                sp.spriteFrame.setRect(rect)
+                sp.node.width = r.width
+                sp.node.height = r.height/2
+            },null,"_bottom")
+            bottom_one.node.x = x
+            bottom_one.node.setAnchorPoint(0.5, 1)
 
-        return {top_one:top_one,bottom_one:bottom_one,str:str_one}
+            top_one.node.parent = this._root
+            bottom_one.node.parent = this._root
+
+            return {top_one:top_one,bottom_one:bottom_one,str:str_one}
+        }
     },
     stop:function()
     {

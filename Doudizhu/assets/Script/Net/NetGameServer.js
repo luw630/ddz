@@ -17,15 +17,12 @@ global.NetGameServer = cc.Class({
     {
     	if(this._need_close)
     	{
+            global.GNetGameServer = null
     		return
     	}
         global.GNetDataModel.setState(this._host,this._port,global.ENetState.Closed)
         cc.log("connection is closed："+e)
         var cfg = global.GNetDataModel.getGameServerCfg()
-        if (this._need_close)
-        {
-            return
-        }
         if(cfg)//断线重连
         {
             this.init(cfg.host,cfg.port)
@@ -53,10 +50,10 @@ global.NetGameServer = cc.Class({
         {
             cmd : "EnterGame",
             device_info : "device info you know!",
-            uid : global.GPlatformDataModel.uid,
+            uid : global.GLoginDataModel.uid,
             rid : global.GRoleManager.getSelfRid(),
-            expiretime : global.GPlatformDataModel.expiretime,
-            logintoken : global.GPlatformDataModel.token
+            expiretime : global.GLoginDataModel.expiretime,
+            logintoken : global.GLoginDataModel.token
         }
         this.send(msg)
     },
@@ -100,6 +97,8 @@ global.NetGameServer = cc.Class({
         global.GGameDataModel.setDiffServerTime(jsonData.servertime*1000 - now)
         global.GPlayerDataModel.setBaseInfo(jsonData.baseinfo)
         global.GRoleManager.addOneRole(jsonData.baseinfo)
+
+        global.GGameDataModel.setGameState(global.EGameState.Main)
         
         // 断线二次重连
         if(jsonData.gatesvr_ip && jsonData.gatesvr_ip)
@@ -434,6 +433,7 @@ global.NetGameServer = cc.Class({
     */
     receive_EnterTable:function(jsonData)
     {
+        global.GGameDataModel.setGameState(global.EGameState.Table)
         cc.log("=============== EnterTable")
         global.GRoomDataModel.initByServer(jsonData.gameinfo)
         global.GRoleManager.initByServer(jsonData.gameinfo.tableplayerinfos)
@@ -486,6 +486,7 @@ global.NetGameServer = cc.Class({
     },
     receive_EnterTable_failed:function(jsonData)
     {
+        global.GGameDataModel.setGameState(global.EGameState.Main)
         global.GHelper.showTip(jsonData.errcodedes)
         global.GPageMgr.closePage("Page_Table")
     },
@@ -514,6 +515,8 @@ global.NetGameServer = cc.Class({
     }*/
     receive_ReenterTable:function(jsonData)
     {
+        global.GGameDataModel.setGameState(global.EGameState.Table)
+
         global.GRoomDataModel.initByServer(jsonData.gameinfo)
         global.GRoleManager.initByServer(jsonData.gameinfo.tableplayerinfos)
 
@@ -554,12 +557,11 @@ global.NetGameServer = cc.Class({
     },
     receive_SitdownTable_failed:function(jsonData)
     {
-        global.GHelper.showTip(jsonData.errcodedes)
-        
+        //global.GHelper.showTip("errorcode "+ jsonData.errcode + " " +jsonData.errcodedes)
+        cc.log("@@@@@@@@@@@@@@"+ "errorcode "+ jsonData.errcode + " " +jsonData.errcodedes)
         var state = global.GPlayerDataModel.getPlayerState()
         if (jsonData.errcode && jsonData.errcode == 14)
         {//当前桌子已经满员;
-            
             if (state == global.EPlayerState.Observe_Game)
             {
                 global.GPageMgr.closePage("Page_Popup")
@@ -574,21 +576,12 @@ global.NetGameServer = cc.Class({
                     roomsvr_id:gameinfo.roomsvr_id,
                     roomsvr_table_address:gameinfo.roomsvr_table_address,
                 }
+                cc.log("####################send_LeaveTable")
                 global.GNetGameServer.send_LeaveTable(data)
+                
             }
             return
         }
-
-        //todo:暂时自己主动离开房间，以后添加坐入失败的处理比如金币不足VIP等级不够;
-        var gameinfo = global.GRoomDataModel.getGameInfo()
-        var data=
-        {
-            id:gameinfo.id,
-            roomsvr_id:gameinfo.roomsvr_id,
-            roomsvr_table_address:gameinfo.roomsvr_table_address,
-        }
-        global.GNetGameServer.send_LeaveTable(data)
-        
     },
     /*
     //玩家请求准备
@@ -649,6 +642,7 @@ global.NetGameServer = cc.Class({
     */
     receive_LeaveTable:function(jsonData)
     {
+        global.GGameDataModel.setGameState(global.EGameState.Main)
         global.GPageMgr.closePage("Page_Table")
         global.GPageMgr.closePage("Page_Result")
         global.GPageMgr.openPage("Page_Main")
@@ -661,6 +655,7 @@ global.NetGameServer = cc.Class({
     {
         cc.log("receive_LeaveTable_failed")
         global.GHelper.showTip(jsonData.errcodedes)
+        //global.GGameDataModel.setGameState(global.EGameState.Main)
     },
     /*
     //玩家请求操作
@@ -757,6 +752,8 @@ global.NetGameServer = cc.Class({
     message PlayerGameRecordinfoReq {
         optional Version version = 1;
         optional int32 rid = 2;
+        optional int32 id = 3;  //最新一条战绩的自增id
+        optional int32 limit = 4; // 要查询的战绩条数
     }
     //响应玩家战绩信息
     message PlayerGameRecordinfoRes {
@@ -779,11 +776,13 @@ global.NetGameServer = cc.Class({
         optional int32 balancenum = 3; //输赢的数量，+为赢，-为输
         optional string rolename = 4; // 玩家名字
     }*/
-    send_PlayerGameRecordinfo(rid)
+    send_PlayerGameRecordinfo(data)
     {
         var msg = {
             cmd:"PlayerGameRecordinfo",
-            rid:rid,
+            rid: data.rid,
+            id: data.id,
+            limit: data.limit
         }
         this.send(msg)
     },
@@ -972,7 +971,42 @@ global.NetGameServer = cc.Class({
         global.GHelper.log("req server tips " + jsonData.uploadtoken)
         global.GQiNiuManager.uploadFile(jsonData.uploadtoken)
     },
+    /*
+    message ConfBase {
+        optional int32 changetime = 1;
+        optional string confname = 2;
+        optional string confcontent = 3; //json
+    }
+    //客户端请求下载配置文件
+    message DownloadCfgReq {
+        optional Version version = 1;
+        repeated ConfBase resconfinfos = 2;
+    }
+    //响应客户端请求下载配置文件
+    message DownloadCfgRes {
+        optional int32 errcode = 1;
+        optional string errcodedes = 2;
+        repeated ConfBase reqconfinfos = 3;
+    }*/
+    send_DownloadCfg:function(files)
+    {
+        var msg = 
+        {
+            cmd: "DownloadCfg",
+            resconfinfos: files,
+        }
+        this.send(msg)
+    },
+    receive_DownloadCfg:function(jsonData)
+    {
+        if (!jsonData.reqconfinfos) return
 
+        for( var key in jsonData.reqconfinfos)
+        {
+            var file = jsonData.reqconfinfos[key]
+            global.GServerFile.addFile(file.confname, file.changetime, file.confcontent)
+        }
+    },
 
     /*
     ////////////////////notice/////////////////////
@@ -1103,7 +1137,7 @@ global.NetGameServer = cc.Class({
         var clientCards = global.GGameTool.convertServerCardsToClient(jsonData.cards)
         global.GRoomDataModel.addPlayerCards(jsonData.rid, clientCards, true)
 
-        var card_len = jsonData.cards.length == 0 ? global.DefaultDealCardsLen : jsonData.cards.length
+        var card_len = jsonData.cards.length == 0 ? global.EDefaultDealCardsLen : jsonData.cards.length
         global.GRoomDataModel.setRoleCardNum(card_len)
         var page = global.GPageMgr.getPage("Page_Table")
         if (page)
@@ -1408,6 +1442,7 @@ global.NetGameServer = cc.Class({
     {
         if (jsonData.rid == global.GPlayerDataModel.getRid())
         {
+            global.GGameDataModel.setGameState(global.EGameState.Main)
             global.GPageMgr.closePage("Page_Table")
             global.GPageMgr.closePage("Page_Result")
             global.GPageMgr.closePage("Page_Popup")

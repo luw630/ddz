@@ -16,7 +16,12 @@ global.NetLogin = cc.Class({
         this.send_Login()
     },
     onClose:function()
-    {
+    {   
+        global.GNetDataModel.setState(this._host,this._port,global.ENetState.Closed)
+        var cfg = global.GNetDataModel.getGameLoginCfg()
+        this._protoType = global.EProtoType.GoogleProtoBuffer
+        this._host = cfg.host
+        this._port = cfg.port
         var need_recon = this._super()
         if(!need_recon)
         {
@@ -56,11 +61,11 @@ global.NetLogin = cc.Class({
     receive_Login:function(jsonData)
     {
         global.GNetDataModel.setGameServerCfgs(jsonData.gatesvrs)
-        global.GPlatformDataModel.uid = jsonData.uid
+        global.GLoginDataModel.uid = jsonData.uid
         global.GRoleManager.init(jsonData.rid)
-        global.GPlatformDataModel.token = jsonData.logintoken
-        global.GPlatformDataModel.expiretime = jsonData.expiretime
-        //global.GHelper.showTip("LoinSuccInitGame")
+        global.GLoginDataModel.token = jsonData.logintoken
+        global.GLoginDataModel.expiretime = jsonData.expiretime
+        global.GHelper.showTip("LoinSuccInitGame")
         new global.NetGameServer()
         this.close()
     },
